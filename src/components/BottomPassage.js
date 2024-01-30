@@ -1,31 +1,32 @@
+import Cell from './Cell';
 
 const BottomPassage = ({color}) => {
     return (
         <div className={`passage bottom-passage ${color}`}>
         <div className={`passage-container-vertical passage-container-bottom color-${color}`}>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
+          <Cell/>
+          <Cell/>
+          <Cell/>
 
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
+          <Cell/>
+          <Cell/>
+          <Cell/>
 
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
+          <Cell/>
+          <Cell/>
+          <Cell/>
 
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
+          <Cell/>
+          <Cell/>
+          <Cell isStar={true}/>
 
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
+          <Cell/>
+          <Cell/>
+          <Cell/>
 
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
+          <Cell/>
+          <Cell isTopArrow={true} color={color}/>
+          <Cell/>
         </div>
       </div>
     )

@@ -1,32 +1,33 @@
+import Cell from './Cell';
 
 const RightPassage = ({color}) => {
     return (
     
         <div className={`passage right-passage ${color}`}>
         <div className={`passage-container-horizontal passage-container-right color-${color}`}>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
+            <Cell/>
+            <Cell/>
+            <Cell/>
   
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
+            <Cell isStar={true}/>
+            <Cell/>
+            <Cell/>
             
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
+            <Cell/>
+            <Cell/>
+            <Cell/>
             
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
+            <Cell/>
+            <Cell/>
+            <Cell isLeftArrow={true} color={color}/>
             
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
+            <Cell/>
+            <Cell/>
+            <Cell/>
             
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
+            <Cell/>
+            <Cell/>
+            <Cell/>
   
             </div>
   
