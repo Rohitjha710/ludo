@@ -35,13 +35,7 @@ code {
    flex-wrap: wrap;   
    border: 15px solid #6E260E;
 }
-@media only screen and (max-width: 600px) {
-.container-square {
-  position: relative;
-  max-width: 90vw;
-  aspect-ratio:1/1;
-}
-}
+
 
 .container-square > * {
   font-size: 1rem; /* Reset font size for inner elements */
@@ -66,6 +60,7 @@ code {
 .top-passage{
   width: 20%;
   height: 40%;
+  
 }
 .left-passage{
   width: 40%;
@@ -87,13 +82,37 @@ code {
   width: 20%;
   height: 20%;
 }
-.home-colors{
+.home-colors.red{
   width: 0; 
   height: 0; 
+  border-bottom: 52px solid $red;
   border-left: 52px solid $green;
-  border-right: 52px solid $blue;
   border-top: 52px solid $yellow;
-  border-bottom: 52px solid $red
+  border-right: 52px solid $blue;
+}
+.home-colors.green{
+  width: 0; 
+  height: 0; 
+  border-bottom: 52px solid $green;
+  border-left: 52px solid $yellow;
+  border-top: 52px solid $blue;
+  border-right: 52px solid $red;
+}
+.home-colors.yellow{
+  width: 0; 
+  height: 0; 
+  border-bottom: 52px solid $yellow;
+  border-left: 52px solid $blue;
+  border-top: 52px solid $red;
+  border-right: 52px solid $green;
+}
+.home-colors.blue{
+  width: 0; 
+  height: 0; 
+  border-bottom: 52px solid $blue;
+  border-left: 52px solid $red;
+  border-top: 52px solid $green;
+  border-right: 52px solid $yellow;
 }
 .home-square{
   width:$atomic-unit *4;
@@ -140,38 +159,181 @@ code {
 .cell{
   border: 0.5px #D3D3D3 solid;
 }
-.passage-container-top div:nth-child(5),
-.passage-container-top div:nth-child(6),
-.passage-container-top div:nth-child(8),
-.passage-container-top div:nth-child(11),
-.passage-container-top div:nth-child(14),
-.passage-container-top div:nth-child(17) {
+.passage-container-top.color-yellow  div:nth-child(5),
+.passage-container-top.color-yellow div:nth-child(6),
+.passage-container-top.color-yellow div:nth-child(8),
+.passage-container-top.color-yellow div:nth-child(11),
+.passage-container-top.color-yellow div:nth-child(14),
+.passage-container-top.color-yellow div:nth-child(17) {
   background-color: $yellow;
 }
-.passage-container-left div:nth-child(2),
-.passage-container-left div:nth-child(8),
-.passage-container-left div:nth-child(9),
-.passage-container-left div:nth-child(10),
-.passage-container-left div:nth-child(11),
-.passage-container-left div:nth-child(12) {
+.passage-container-top.color-red  div:nth-child(5),
+.passage-container-top.color-red div:nth-child(6),
+.passage-container-top.color-red div:nth-child(8),
+.passage-container-top.color-red div:nth-child(11),
+.passage-container-top.color-red div:nth-child(14),
+.passage-container-top.color-red div:nth-child(17) {
+  background-color: $red;
+}
+.passage-container-top.color-blue  div:nth-child(5),
+.passage-container-top.color-blue div:nth-child(6),
+.passage-container-top.color-blue div:nth-child(8),
+.passage-container-top.color-blue div:nth-child(11),
+.passage-container-top.color-blue div:nth-child(14),
+.passage-container-top.color-blue div:nth-child(17) {
+  background-color: $blue;
+}
+.passage-container-top.color-green  div:nth-child(5),
+.passage-container-top.color-green div:nth-child(6),
+.passage-container-top.color-green div:nth-child(8),
+.passage-container-top.color-green div:nth-child(11),
+.passage-container-top.color-green div:nth-child(14),
+.passage-container-top.color-green div:nth-child(17) {
   background-color: $green;
 }
 
-.passage-container-right div:nth-child(7),
-.passage-container-right div:nth-child(8),
-.passage-container-right div:nth-child(9),
-.passage-container-right div:nth-child(10),
-.passage-container-right div:nth-child(11),
-.passage-container-right div:nth-child(17) {
+
+
+.passage-container-left.color-green div:nth-child(2),
+.passage-container-left.color-green div:nth-child(8),
+.passage-container-left.color-green div:nth-child(9),
+.passage-container-left.color-green div:nth-child(10),
+.passage-container-left.color-green div:nth-child(11),
+.passage-container-left.color-green div:nth-child(12) {
+  background-color: $green;
+}
+
+.passage-container-left.color-red div:nth-child(2),
+.passage-container-left.color-red div:nth-child(8),
+.passage-container-left.color-red div:nth-child(9),
+.passage-container-left.color-red div:nth-child(10),
+.passage-container-left.color-red div:nth-child(11),
+.passage-container-left.color-red div:nth-child(12) {
+  background-color: $red;
+}
+.passage-container-left.color-yellow div:nth-child(2),
+.passage-container-left.color-yellow div:nth-child(8),
+.passage-container-left.color-yellow div:nth-child(9),
+.passage-container-left.color-yellow div:nth-child(10),
+.passage-container-left.color-yellow div:nth-child(11),
+.passage-container-left.color-yellow div:nth-child(12) {
+  background-color: $yellow;
+}
+.passage-container-left.color-blue div:nth-child(2),
+.passage-container-left.color-blue div:nth-child(8),
+.passage-container-left.color-blue div:nth-child(9),
+.passage-container-left.color-blue div:nth-child(10),
+.passage-container-left.color-blue div:nth-child(11),
+.passage-container-left.color-blue div:nth-child(12) {
   background-color: $blue;
 }
 
 
-.passage-container-bottom div:nth-child(2),
-.passage-container-bottom div:nth-child(5),
-.passage-container-bottom div:nth-child(8),
-.passage-container-bottom div:nth-child(11),
-.passage-container-bottom div:nth-child(14),
-.passage-container-bottom div:nth-child(13) {
+.passage-container-right.color-blue div:nth-child(7),
+.passage-container-right.color-blue div:nth-child(8),
+.passage-container-right.color-blue div:nth-child(9),
+.passage-container-right.color-blue div:nth-child(10),
+.passage-container-right.color-blue div:nth-child(11),
+.passage-container-right.color-blue div:nth-child(17) {
+  background-color: $blue;
+}
+
+.passage-container-right.color-yellow div:nth-child(7),
+.passage-container-right.color-yellow div:nth-child(8),
+.passage-container-right.color-yellow div:nth-child(9),
+.passage-container-right.color-yellow div:nth-child(10),
+.passage-container-right.color-yellow div:nth-child(11),
+.passage-container-right.color-yellow div:nth-child(17) {
+  background-color: $yellow;
+}
+.passage-container-right.color-red div:nth-child(7),
+.passage-container-right.color-red div:nth-child(8),
+.passage-container-right.color-red div:nth-child(9),
+.passage-container-right.color-red div:nth-child(10),
+.passage-container-right.color-red div:nth-child(11),
+.passage-container-right.color-red div:nth-child(17) {
   background-color: $red;
 }
+.passage-container-right.color-green div:nth-child(7),
+.passage-container-right.color-green div:nth-child(8), 
+.passage-container-right.color-green div:nth-child(9),
+.passage-container-right.color-green div:nth-child(10),
+.passage-container-right.color-green div:nth-child(11),
+.passage-container-right.color-green div:nth-child(17) {
+  background-color: $green;
+}
+
+
+.passage-container-bottom.color-red div:nth-child(2),
+.passage-container-bottom.color-red div:nth-child(5),
+.passage-container-bottom.color-red div:nth-child(8),
+.passage-container-bottom.color-red div:nth-child(11),
+.passage-container-bottom.color-red div:nth-child(14),
+.passage-container-bottom.color-red div:nth-child(13) {
+  background-color: $red;
+}
+.passage-container-bottom.color-green div:nth-child(2),
+.passage-container-bottom.color-green div:nth-child(5),
+.passage-container-bottom.color-green div:nth-child(8),
+.passage-container-bottom.color-green div:nth-child(11),
+.passage-container-bottom.color-green div:nth-child(14),
+.passage-container-bottom.color-green div:nth-child(13) {
+  background-color: $green;
+}
+.passage-container-bottom.color-yellow div:nth-child(2),
+.passage-container-bottom.color-yellow div:nth-child(5),
+.passage-container-bottom.color-yellow div:nth-child(8),
+.passage-container-bottom.color-yellow div:nth-child(11),
+.passage-container-bottom.color-yellow div:nth-child(14),
+.passage-container-bottom.color-yellow div:nth-child(13) {
+  background-color: $yellow;
+}
+.passage-container-bottom.color-blue div:nth-child(2),
+.passage-container-bottom.color-blue div:nth-child(5),
+.passage-container-bottom.color-blue div:nth-child(8),
+.passage-container-bottom.color-blue div:nth-child(11),
+.passage-container-bottom.color-blue div:nth-child(14),
+.passage-container-bottom.color-blue div:nth-child(13) {
+  background-color: $blue;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .container-square {
+    position: relative;
+    max-width: 90vw;
+    aspect-ratio:1/1;
+  }
+  .home-colors.red{
+    width: 0; 
+    height: 0; 
+    border-bottom: 33px solid $red;
+    border-left: 33px solid $green;
+    border-top: 33px solid $yellow;
+    border-right: 33px solid $blue;
+  }
+  .home-colors.green{
+    width: 0; 
+    height: 0; 
+    border-bottom: 33px solid $green;
+    border-left: 33px solid $yellow;
+    border-top: 33px solid $blue;
+    border-right: 33px solid $red;
+  }
+  .home-colors.yellow{
+    width: 0; 
+    height: 0; 
+    border-bottom: 33px solid $yellow;
+    border-left: 33px solid $blue;
+    border-top: 33px solid $red;
+    border-right: 33px solid $green;
+  }
+  .home-colors.blue{
+    width: 0; 
+    height: 0; 
+    border-bottom: 33px solid $blue;
+    border-left: 33px solid $red;
+    border-top: 33px solid $green;
+    border-right: 33px solid $yellow;
+  }
+  }

@@ -1,161 +1,29 @@
+import Home from "./Home";
+import TopPassage from "./TopPassage";
+import LeftPassage from "./LeftPassage";
+import RightPassage from "./RightPassage";
+import BottomPassage from "./BottomPassage";
+import AllHome from './AllHome';
+import {useState} from 'react';
 const Container = () => {
+  const [myColor,changeMyColor]=useState('red');
+  const fourColor = ['red','green','yellow','blue']
+  const player1=myColor;
+  const player2=fourColor[(fourColor.indexOf(myColor)+1)%4];
+  const player3=fourColor[(fourColor.indexOf(myColor)+2)%4];
+  const player4=fourColor[(fourColor.indexOf(myColor)+3)%4];
+
   return (
     <div className="container-square">
-      <div className="home-container green">
-        <div className="home-square">
-            <div className="home-square-circle green"></div>
-            <div className="home-square-circle green"></div>
-            <div className="home-square-circle green"></div>
-            <div className="home-square-circle green"></div>
-        </div>
-      </div>
-      <div className="passage top-passage yellow">
-          <div className="passage-container-vertical passage-container-top">
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-
-          </div>
-
-      </div>
-      <div className="home-container yellow">
-        <div className="home-square">
-        <div className="home-square-circle yellow"></div>
-            <div className="home-square-circle yellow"></div>
-            <div className="home-square-circle yellow"></div>
-            <div className="home-square-circle yellow"></div>
-        </div>
-      </div>
-
-      <div className="passage left-passage green">
-      <div className="passage-container-horizontal passage-container-left">
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-
-          </div>
-
-      </div>
-      <div className="home-container-all">
-        <div className="home-colors"></div>
-      </div>
-      <div className="passage right-passage blue">
-      <div className="passage-container-horizontal passage-container-right">
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-
-          </div>
-
-      </div>
-
-      <div className="home-container red">
-        {" "}
-        <div className="home-square">
-        <div className="home-square-circle red"></div>
-            <div className="home-square-circle red"></div>
-            <div className="home-square-circle red"></div>
-            <div className="home-square-circle red"></div>
-        </div>
-      </div>
-      <div className="passage bottom-passage red">
-      <div className="passage-container-vertical passage-container-bottom">
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-          
-          <div className="cell"></div>
-          <div className="cell"></div>
-          <div className="cell"></div>
-
-          </div>
-
-      </div>
-      <div className="home-container blue">
-        {" "}
-        <div className="home-square">
-        <div className="home-square-circle blue"></div>
-            <div className="home-square-circle blue"></div>
-            <div className="home-square-circle blue"></div>
-            <div className="home-square-circle blue"></div>
-        </div>
-      </div>
+      <Home color={player2} />
+      <TopPassage color={player3} />
+      <Home color={player3} />
+      <LeftPassage color={player2} />
+     <AllHome color={myColor}/> 
+      <RightPassage color={player4} />
+      <Home color={player1} />
+     <BottomPassage color={player1}/>
+      <Home color={player4} />
     </div>
   );
 };
