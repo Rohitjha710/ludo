@@ -2,7 +2,7 @@ import Container from './components/Container';
 function App() {
   return (
     <div className="App">
-      <h1 className="display-1 text-center">
+      <h1 className="display-1 text-center gray">
         Ludo by Rohit      
       </h1>
       <Container/>

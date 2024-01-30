@@ -6,6 +6,7 @@ $green:#009900;
 $yellow:#FFCC00;
 
 body {
+  background-color: #0040ff;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -13,7 +14,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.gray{
+  color: darkslategray
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -23,21 +26,20 @@ code {
 }
 .container-square {
   position: relative;
-  max-width: 40vw;
+  width: 500px;
   aspect-ratio:1/1;
    border:1px #3498db solid;
    margin: auto;
    font-size: 0;
-   
+   display: flex;
+   flex-wrap: wrap;   
+   border: 15px solid #6E260E;
 }
 @media only screen and (max-width: 600px) {
 .container-square {
   position: relative;
-  width: 90vw;
+  max-width: 90vw;
   aspect-ratio:1/1;
-   background-color:1px #3498db solid;
-   margin: auto;
-   font-size: 0;
 }
 }
 
@@ -48,7 +50,6 @@ code {
 .home-container{
   width: 40%;
   aspect-ratio:1/1;
-  display: inline-block;
 }
 .home-container.green{
   background-color: $green;
@@ -79,14 +80,20 @@ code {
   height: 40%;
 }
 .passage{
-  display: inline-block;
-  background-color: grey;
+  background-color: #FAF9F6;
   position: relative;
 }
 .home-container-all{
-  display: inline-block;
   width: 20%;
   height: 20%;
+}
+.home-colors{
+  width: 0; 
+  height: 0; 
+  border-left: 52px solid $green;
+  border-right: 52px solid $blue;
+  border-top: 52px solid $yellow;
+  border-bottom: 52px solid $red
 }
 .home-square{
   width:$atomic-unit *4;
@@ -94,17 +101,77 @@ code {
   background-color: #FEFEFA;
   margin-left: $atomic-unit;
   margin-top:$atomic-unit;
+  display: flex;
+  flex-wrap: wrap;
 }
 .home-square-circle{
+  width: 25%;
+  height: 25%;
+  margin-left: 16%;
+  margin-top: 13%;
+  border-radius: 50%;
 }
-.passage-container{
+.home-square-circle.green{
+  background-color: $green;
+}
+.home-square-circle.red{
+  background-color: $red;
+}
+.home-square-circle.blue{
+  background-color: $blue;
+}
+.home-square-circle.yellow{
+  background-color: $yellow;
+}
+.passage-container-vertical{
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
   grid-template-rows: repeat(6, 1fr);
 }
+.passage-container-horizontal{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 3 columns with equal width */
+  grid-template-rows: repeat(3, 1fr);
+}
 .cell{
+  border: 0.5px #D3D3D3 solid;
+}
+.passage-container-top div:nth-child(5),
+.passage-container-top div:nth-child(6),
+.passage-container-top div:nth-child(8),
+.passage-container-top div:nth-child(11),
+.passage-container-top div:nth-child(14),
+.passage-container-top div:nth-child(17) {
+  background-color: $yellow;
+}
+.passage-container-left div:nth-child(2),
+.passage-container-left div:nth-child(8),
+.passage-container-left div:nth-child(9),
+.passage-container-left div:nth-child(10),
+.passage-container-left div:nth-child(11),
+.passage-container-left div:nth-child(12) {
+  background-color: $green;
+}
 
-  border: 1px red solid;
+.passage-container-right div:nth-child(7),
+.passage-container-right div:nth-child(8),
+.passage-container-right div:nth-child(9),
+.passage-container-right div:nth-child(10),
+.passage-container-right div:nth-child(11),
+.passage-container-right div:nth-child(17) {
+  background-color: $blue;
+}
+
+
+.passage-container-bottom div:nth-child(2),
+.passage-container-bottom div:nth-child(5),
+.passage-container-bottom div:nth-child(8),
+.passage-container-bottom div:nth-child(11),
+.passage-container-bottom div:nth-child(14),
+.passage-container-bottom div:nth-child(13) {
+  background-color: $red;
 }
