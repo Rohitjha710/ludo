@@ -4,9 +4,7 @@ import LeftPassage from "./LeftPassage";
 import RightPassage from "./RightPassage";
 import BottomPassage from "./BottomPassage";
 import AllHome from './AllHome';
-import {useState} from 'react';
-const Container = () => {
-  const [myColor,changeMyColor]=useState('red');
+const Container = ({myColor}) => {
   const fourColor = ['red','green','yellow','blue']
   const player1=myColor;
   const player2=fourColor[(fourColor.indexOf(myColor)+1)%4];
