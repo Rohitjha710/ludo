@@ -1,0 +1,110 @@
+$atomic-unit: 16.666666%;
+$cell-width-vertical:31.33333%;
+$blue:#66CCFF;
+$red:#FF0000;
+$green:#009900;
+$yellow:#FFCC00;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.text-center {
+  text-align: center;
+}
+.container-square {
+  position: relative;
+  max-width: 40vw;
+  aspect-ratio:1/1;
+   border:1px #3498db solid;
+   margin: auto;
+   font-size: 0;
+   
+}
+@media only screen and (max-width: 600px) {
+.container-square {
+  position: relative;
+  width: 90vw;
+  aspect-ratio:1/1;
+   background-color:1px #3498db solid;
+   margin: auto;
+   font-size: 0;
+}
+}
+
+.container-square > * {
+  font-size: 1rem; /* Reset font size for inner elements */
+}
+
+.home-container{
+  width: 40%;
+  aspect-ratio:1/1;
+  display: inline-block;
+}
+.home-container.green{
+  background-color: $green;
+}
+.home-container.red{
+  background-color: $red;
+}
+.home-container.yellow{
+  background-color: $yellow;
+}
+.home-container.blue{
+  background-color: $blue;
+}
+.top-passage{
+  width: 20%;
+  height: 40%;
+}
+.left-passage{
+  width: 40%;
+  height: 20%;
+}
+.right-passage{
+  width: 40%;
+  height: 20%;
+}
+.bottom-passage{
+  width: 20%;
+  height: 40%;
+}
+.passage{
+  display: inline-block;
+  background-color: grey;
+  position: relative;
+}
+.home-container-all{
+  display: inline-block;
+  width: 20%;
+  height: 20%;
+}
+.home-square{
+  width:$atomic-unit *4;
+  aspect-ratio:1/1;
+  background-color: #FEFEFA;
+  margin-left: $atomic-unit;
+  margin-top:$atomic-unit;
+}
+.home-square-circle{
+}
+.passage-container{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+  grid-template-rows: repeat(6, 1fr);
+}
+.cell{
+
+  border: 1px red solid;
+}
