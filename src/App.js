@@ -65,6 +65,21 @@ function App(props) {
     assignColorToAllCoins(color)
   };
   const onclick =()=>{
+    let changedGameState = {...gameState};
+    let changedCoinState = {...coinsState};
+    let cellNo = coinsState['p1Coin1'].cellNo;
+    let nextCellNo = (parseInt(cellNo)+1).toString();
+
+    changedGameState[cellNo] = {...changedGameState[cellNo],cellState: { coins: [] }};
+    changedGameState[nextCellNo] = {...changedGameState[nextCellNo], cellState: { coins: ['p1Coin1'] } };
+    changeGameState((prevGameState) => {
+      return changedGameState;
+    });
+    changeCoinsState((prevCoinsState)=>{
+      const changedCoinState={...prevCoinsState};
+      changedCoinState['p1Coin1']={cellNo:nextCellNo, color:myColor}
+      return changedCoinState;
+    })
   }
   return (
     <div className="App">

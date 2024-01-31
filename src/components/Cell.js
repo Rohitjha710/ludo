@@ -19,7 +19,7 @@ const Cell = (props) => {
         color: colors[props.color],
         fontSize:'30px'
       };
-    
+
     return (
         <div className="cell" style={{position:'relative'}}>
            {props.isStar?<FaStar style={{ position:'absolute',color: '#B2BEB5',left:'5%',top:'5%',fontSize:'30px' , zIndex: 1}} />:''}
