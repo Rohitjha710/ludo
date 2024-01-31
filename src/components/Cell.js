@@ -21,6 +21,7 @@ const Cell = (props) => {
            {props.isLeftArrow?<FaArrowLeft style={arrowStyle} />:''}
            {props.isRightArrow?<FaArrowRight style={arrowStyle} />:''}
            {props.isBottomArrow?<FaArrowDown style={arrowStyle} />:''}
+           {props.id?props.id:''}
         </div>
     )
 }

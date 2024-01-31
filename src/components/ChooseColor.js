@@ -1,18 +1,38 @@
-import Form from 'react-bootstrap/Form';
+import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 
-const ChooseColor = () => {
-    const onSubmit =(e)=>{
-e.preventDefault();
-console.log(e.target.value);
-    }
+
+const ChooseColor = ({chooseColor}) => {
+  const [selectedOption, setSelectedOption] = useState('');
+  
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if(!selectedOption){return;}
+    chooseColor(selectedOption);
+  };
     return (
-        <Form.Select aria-label="Default select example" onSubmit={onsubmit}>
-          <option>Open this select menu</option>
+      <div className="form-container">
+      <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="exampleForm.SelectCustom">
+        <Form.Label>Select an option:</Form.Label>
+        <Form.Control as="select" custom onChange={handleSelectChange} value={selectedOption} style={{fontSize:'20px'}}>
+        <option value="">Open this select menu</option>
           <option value="red">Red</option>
           <option value="green">Green</option>
           <option value="yellow">Yellow</option>
           <option value="blue">Blue</option>
-        </Form.Select>
+          </Form.Control>
+      </Form.Group>
+
+      <Button variant="primary" type="submit" style={{fontSize:'15px'}}>
+        Submit
+      </Button>
+    </Form>
+    </div>
       );
 }
 
