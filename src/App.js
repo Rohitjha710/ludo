@@ -12,7 +12,7 @@ function App(props) {
   const player3Color=fourColor[(fourColor.indexOf(myColor)+2)%4];
   const player4Color=fourColor[(fourColor.indexOf(myColor)+3)%4];
   const coinsStateInitial={
-    p1Coin1:{cellNo:"p1h1", color:myColor},
+    p1Coin1:{cellNo:"1", color:myColor},
     p1Coin2:{cellNo:"p1h2", color:myColor},
     p1Coin3:{cellNo:"p1h3", color:myColor},
     p1Coin4:{cellNo:"p1h4", color:myColor},
@@ -64,11 +64,16 @@ function App(props) {
     setPlayer1Color(true);
     assignColorToAllCoins(color)
   };
+  const onclick =()=>{
+  }
   return (
     <div className="App">
       <h1 className="display-1 text-center gray">Ludo by Rohit</h1>
       {colorChoosen ? (
+        <>
+        <button onClick={onclick}>Click</button>
         <Container myColor={myColor} gameState={gameState} coinsState={coinsState} player2Color={player2Color} player3Color={player3Color} player4Color={player4Color} />
+        </>
       ) : (
         <ChooseColor chooseColor={chooseColor} />
       )}
