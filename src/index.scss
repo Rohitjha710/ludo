@@ -4,6 +4,10 @@ $blue:#66CCFF;
 $red:#FF0000;
 $green:#009900;
 $yellow:#FFCC00;
+$coinBlue:#336699;
+$coinRed:#990000;
+$coinGreen:#006600;
+$coinYellow:#CC9900;
 
 body {
   background-color: #0040ff;
@@ -142,6 +146,7 @@ code {
 .home-square-circle.yellow{
   background-color: $yellow;
 }
+
 .passage-container-vertical{
   width: 100%;
   height: 100%;
@@ -347,4 +352,28 @@ code {
     padding: 20px;
     border: 10px solid brown;
     font-size: 20px;
+  }
+
+  .home-square-circle-coin{
+    width: 22px;
+    height: 22px;
+    margin-left: 17%;
+    margin-top: 17%;
+    border-radius: 50%;
+  }
+  .home-square-circle-coin.cell-coin{
+    margin-left: 5px!important;
+    margin-top:5px!important;
+  }
+  .home-square-circle-coin.green{
+    background-color: $coinGreen!important;
+  }
+  .home-square-circle-coin.red{
+    background-color: $coinRed!important;
+  }
+  .home-square-circle-coin.blue{
+    background-color: $coinBlue!important;
+  }
+  .home-square-circle-coin.yellow{
+    background-color: $coinYellow!important;
   }

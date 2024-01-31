@@ -4,24 +4,28 @@ import LeftPassage from "./LeftPassage";
 import RightPassage from "./RightPassage";
 import BottomPassage from "./BottomPassage";
 import AllHome from './AllHome';
-const Container = ({myColor}) => {
-  const fourColor = ['red','green','yellow','blue']
+const Container = ({myColor,gameState,coinsState,player2Color,player3Color,player4Color}) => {
   const player1=myColor;
-  const player2=fourColor[(fourColor.indexOf(myColor)+1)%4];
-  const player3=fourColor[(fourColor.indexOf(myColor)+2)%4];
-  const player4=fourColor[(fourColor.indexOf(myColor)+3)%4];
+  const player2=player2Color;
+  const player3=player3Color;
+  const player4=player4Color;
 
   return (
     <div className="container-square">
-      <Home color={player2} />
-      <TopPassage color={player3} />
-      <Home color={player3} />
-      <LeftPassage color={player2} />
-     <AllHome color={myColor}/> 
-      <RightPassage color={player4} />
-      <Home color={player1} />
-     <BottomPassage color={player1}/>
-      <Home color={player4} />
+      {coinsState ?<> <Home player="p2" color={player2} gameState={gameState} coinsState={coinsState}/>
+      <TopPassage color={player3} gameState={gameState} coinsState={coinsState}/>
+      <Home player="p3" color={player3} gameState={gameState} coinsState={coinsState}/>
+
+
+      <LeftPassage color={player2} gameState={gameState} coinsState={coinsState}/>
+     <AllHome color={myColor} gameState={gameState} coinsState={coinsState}/> 
+      <RightPassage color={player4} gameState={gameState} coinsState={coinsState}/>
+
+
+      <Home player="p1" color={player1} gameState={gameState} coinsState={coinsState}/>
+     <BottomPassage color={player1} gameState={gameState} coinsState={coinsState}/>
+      <Home player="p4" color={player4} gameState={gameState} coinsState={coinsState}/></>:''}
+   
     </div>
   );
 };
