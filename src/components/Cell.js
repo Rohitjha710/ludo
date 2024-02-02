@@ -16,17 +16,16 @@ const Cell = (props) => {
             red: '#990000', 
         }
     const arrowStyle = {
-        color: colors[props.color],
-        fontSize:'30px'
+        color: colors[props.color]
       };
 
     return (
         <div className="cell" style={{position:'relative'}}>
-           {props.isStar?<FaStar style={{ position:'absolute',color: '#B2BEB5',left:'5%',top:'5%',fontSize:'30px' , zIndex: 1}} />:''}
-           {props.isTopArrow?<FaArrowUp style={arrowStyle} />:''}
-           {props.isLeftArrow?<FaArrowLeft style={arrowStyle} />:''}
-           {props.isRightArrow?<FaArrowRight style={arrowStyle} />:''}
-           {props.isBottomArrow?<FaArrowDown style={arrowStyle} />:''}
+           {props.isStar?<FaStar className='star-cell'  style={{ position:'absolute',color: '#B2BEB5',left:'5%',top:'5%', zIndex: 1}}/>:''}
+           {props.isTopArrow?<FaArrowUp className='fa-arrows-icons ml-3' style={arrowStyle} />:''}
+           {props.isLeftArrow?<FaArrowLeft className='fa-arrows-icons ml-3 mt-3' style={arrowStyle} />:''}
+           {props.isRightArrow?<FaArrowRight className='fa-arrows-icons ml-4 mt-4' style={arrowStyle} />:''}
+           {props.isBottomArrow?<FaArrowDown className='fa-arrows-icons ml-3' style={arrowStyle} />:''}
            {props.gameState[props.id].cellState.coins.length>0?
             <div 
            className={`home-square-circle-coin cell-coin ${props.coinsState[props.gameState[props.id].cellState.coins[0]].color}`}

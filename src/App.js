@@ -1,5 +1,6 @@
 import Container from "./components/Container";
 import ChooseColor from "./components/ChooseColor";
+import Dice from './components/Dice';
 import { useState, useEffect } from "react";
 import { reverseCoinMap } from "./utils/utils";
 function App(props) {
@@ -15,7 +16,7 @@ function App(props) {
   const player4Color = fourColor[(fourColor.indexOf(myColor) + 3) % 4];
 
   const coinsStateInitial = {
-    p1Coin1: { cellNo: "1", color: myColor },
+    p1Coin1: { cellNo: "p1h1", color: myColor },
     p1Coin2: { cellNo: "p1h2", color: myColor },
     p1Coin3: { cellNo: "p1h3", color: myColor },
     p1Coin4: { cellNo: "p1h4", color: myColor },
@@ -34,6 +35,11 @@ function App(props) {
   };
 
   const [coinsState, changeCoinsState] = useState(coinsStateInitial);
+  const [diceState, changeDiceState] = useState({
+    whoseChance:'p1',
+    value:'',
+    canbeRolled:true
+  });
 
   const assignColorToAllCoins = color => {
     const player2Color = fourColor[(fourColor.indexOf(color) + 1) % 4];
@@ -76,6 +82,7 @@ function App(props) {
     } else if (cellNo == "p1hg5") {
       nextCellNo = "home";
     }else if(cellNo=='home'){alert('not allowed coin is home');return;}
+    else if(cellNo=='p1h1'){nextCellNo='1'}
      else {
       nextCellNo = gameState[parseInt(reverseCoinMap[cellNo]) + 1].cellNo;
     }
@@ -98,12 +105,18 @@ function App(props) {
     });
   };
 
+  const onDiceRoll = ()=>{
+    let diceValue = (Math.floor(Math.random() * 6) + 1).toString();
+    changeDiceState({...diceState,value:diceValue})
+  }
+
   return (
     <div className="App">
       <h1 className="display-1 text-center gray">Ludo by Rohit</h1>
+     
       {colorChoosen ? (
-        <>
-          <button onClick={onclick}>Click</button>
+        <div className="board-and-dice">
+          {/* <button onClick={onclick}>Click</button> */}
           <Container
             myColor={myColor}
             gameState={gameState}
@@ -112,7 +125,8 @@ function App(props) {
             player3Color={player3Color}
             player4Color={player4Color}
           />
-        </>
+         <Dice diceState={diceState} onDiceRoll={onDiceRoll}/>
+        </div>
       ) : (
         <ChooseColor chooseColor={chooseColor} />
       )}
@@ -121,7 +135,7 @@ function App(props) {
 }
 App.defaultProps = {
   gameState: {
-    "1": { cellNo: "1", cellState: { coins: ["p1Coin1"] } },
+    "1": { cellNo: "1", cellState: { coins: [] } },
     "2": { cellNo: "2", cellState: { coins: [] } },
     "3": { cellNo: "3", cellState: { coins: [] } },
     "4": { cellNo: "4", cellState: { coins: [] } },
@@ -173,7 +187,7 @@ App.defaultProps = {
     "50": { cellNo: "50", cellState: { coins: [] } },
     "51": { cellNo: "51", cellState: { coins: [] } },
     "52": { cellNo: "52", cellState: { coins: [] } },
-    "53": { cellNo: "p1h1", cellState: { coins: [] } },
+    "53": { cellNo: "p1h1", cellState: { coins: ['p1Coin1'] } },
     "54": { cellNo: "p1h2", cellState: { coins: [] } },
     "55": { cellNo: "p1h3", cellState: { coins: [] } },
     "56": { cellNo: "p1h4", cellState: { coins: [] } },
