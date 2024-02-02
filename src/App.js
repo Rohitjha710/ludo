@@ -17,7 +17,7 @@ function App(props) {
 
   const coinsStateInitial = {
     p1Coin1: { cellNo: "1", color: myColor },
-    p1Coin2: { cellNo: "p1h2", color: myColor },
+    p1Coin2: { cellNo: "71", color: myColor },
     p1Coin3: { cellNo: "p1h3", color: myColor },
     p1Coin4: { cellNo: "p1h4", color: myColor },
     p2Coin1: { cellNo: "p2h1", color: myColor },
@@ -77,7 +77,7 @@ function App(props) {
     let nextStateForCoins = {};
     for(let i=0;i<=3;i++){
     let currentCellNoOftheCoin=coinsState[`${player}Coin${i+1}`].cellNo;
-    let currentIndexOfCoinInJourney=props.allCombination[player].indexOf(reverseCoinMap[currentCellNoOftheCoin]);
+    let currentIndexOfCoinInJourney=props.allCombination[player].indexOf(currentCellNoOftheCoin);
     // console.log(i,currentCellNoOftheCoin,currentIndexOfCoinInJourney)
     // console.log(substrings.some(substring =>currentCellNoOftheCoin.includes(substring)),diceValue)
     if(currentCellNoOftheCoin==='home'){
@@ -89,12 +89,11 @@ function App(props) {
     else if(substrings.some(substring =>currentCellNoOftheCoin.includes(substring))){
       nextStateForCoins[`${i}`]="";
     }
-    else if(currentIndexOfCoinInJourney+diceValue<=56){
-      nextStateForCoins[`${i}`]=gameState[props.allCombination[player][currentIndexOfCoinInJourney+diceValue]].cellNo;
+    else if(currentIndexOfCoinInJourney+parseInt(diceValue)<=56){
+      nextStateForCoins[`${i}`]=gameState[props.allCombination[player][currentIndexOfCoinInJourney+parseInt(diceValue)]].cellNo;
     }
     else{
       nextStateForCoins[`${i}`]="";
-
     }
   }
     return nextStateForCoins;
@@ -103,7 +102,7 @@ function App(props) {
   const onclick = () => {
     let changedGameState = { ...gameState };
     let changedCoinState = { ...coinsState };
-    let diceValue='6';
+    let diceValue='3';
     console.log(getNextCellNumbersForAllCoins('p1',diceValue));
     return;
     let cellNo = coinsState["p1Coin1"].cellNo;
@@ -219,7 +218,7 @@ App.defaultProps = {
     "50": { cellNo: "50", cellState: { coins: [] } },
     "51": { cellNo: "51", cellState: { coins: [] } },
     "52": { cellNo: "52", cellState: { coins: [] } },
-    "53": { cellNo: "p1h1", cellState: { coins: ['p1Coin1'] } },
+    "53": { cellNo: "p1h1", cellState: { coins: [] } },
     "54": { cellNo: "p1h2", cellState: { coins: [] } },
     "55": { cellNo: "p1h3", cellState: { coins: [] } },
     "56": { cellNo: "p1h4", cellState: { coins: [] } },
@@ -238,7 +237,7 @@ App.defaultProps = {
 
     "69": { cellNo: "p1hg1", cellState: { coins: [] } },
     "70": { cellNo: "p1hg2", cellState: { coins: [] } },
-    "71": { cellNo: "p1hg3", cellState: { coins: [] } },
+    "71": { cellNo: "p1hg3", cellState: { coins: ['p1Coin2'] } },
     "72": { cellNo: "p1hg4", cellState: { coins: [] } },
     "73": { cellNo: "p1hg5", cellState: { coins: [] } },
     "74": { cellNo: "p2hg1", cellState: { coins: [] } },
