@@ -16,7 +16,7 @@ function App(props) {
   const player4Color = fourColor[(fourColor.indexOf(myColor) + 3) % 4];
 
   const coinsStateInitial = {
-    p1Coin1: { cellNo: "p1h1", color: myColor },
+    p1Coin1: { cellNo: "1", color: myColor },
     p1Coin2: { cellNo: "p1h2", color: myColor },
     p1Coin3: { cellNo: "p1h3", color: myColor },
     p1Coin4: { cellNo: "p1h4", color: myColor },
@@ -34,6 +34,7 @@ function App(props) {
     p4Coin4: { cellNo: "p4h4", color: player4Color }
   };
 
+  const [tempInput, changeTempInput] = useState('');
   const [coinsState, changeCoinsState] = useState(coinsStateInitial);
   const [diceState, changeDiceState] = useState({
     whoseChance:'p1',
@@ -71,18 +72,48 @@ function App(props) {
     assignColorToAllCoins(color);
   };
 
+  const getNextCellNumbersForAllCoins = (player,diceValue)=>{
+    const substrings = ["h1", "h2", "h3",'h4'];
+    let nextStateForCoins = {};
+    for(let i=0;i<=3;i++){
+    let currentCellNoOftheCoin=coinsState[`${player}Coin${i+1}`].cellNo;
+    let currentIndexOfCoinInJourney=props.allCombination[player].indexOf(reverseCoinMap[currentCellNoOftheCoin]);
+    // console.log(i,currentCellNoOftheCoin,currentIndexOfCoinInJourney)
+    // console.log(substrings.some(substring =>currentCellNoOftheCoin.includes(substring)),diceValue)
+    if(currentCellNoOftheCoin==='home'){
+      nextStateForCoins[`${i}`]="";
+    }
+    else if(substrings.some(substring =>currentCellNoOftheCoin.includes(substring))&&diceValue==='6'){
+      nextStateForCoins[`${i}`]=props.allCombination[player][0];
+    }
+    else if(substrings.some(substring =>currentCellNoOftheCoin.includes(substring))){
+      nextStateForCoins[`${i}`]="";
+    }
+    else if(currentIndexOfCoinInJourney+diceValue<=56){
+      nextStateForCoins[`${i}`]=gameState[props.allCombination[player][currentIndexOfCoinInJourney+diceValue]].cellNo;
+    }
+    else{
+      nextStateForCoins[`${i}`]="";
+
+    }
+  }
+    return nextStateForCoins;
+  }
+
   const onclick = () => {
     let changedGameState = { ...gameState };
     let changedCoinState = { ...coinsState };
-
+    let diceValue='6';
+    console.log(getNextCellNumbersForAllCoins('p1',diceValue));
+    return;
     let cellNo = coinsState["p1Coin1"].cellNo;
     let nextCellNo;
-    if (cellNo == "51") {
+    if (cellNo === "51") {
       nextCellNo = "p1hg1";
-    } else if (cellNo == "p1hg5") {
+    } else if (cellNo === "p1hg5") {
       nextCellNo = "home";
-    }else if(cellNo=='home'){alert('not allowed coin is home');return;}
-    else if(cellNo=='p1h1'){nextCellNo='1'}
+    }else if(cellNo==='home'){alert('not allowed coin is home');return;}
+    else if(cellNo==='p1h1'){nextCellNo='1'}
      else {
       nextCellNo = gameState[parseInt(reverseCoinMap[cellNo]) + 1].cellNo;
     }
@@ -116,7 +147,8 @@ function App(props) {
      
       {colorChoosen ? (
         <div className="board-and-dice">
-          {/* <button onClick={onclick}>Click</button> */}
+          <button onClick={onclick}>Click</button>
+          <input value={tempInput} onChange={(e)=>{changeTempInput(e.target.value)}}/>
           <Container
             myColor={myColor}
             gameState={gameState}
@@ -135,7 +167,7 @@ function App(props) {
 }
 App.defaultProps = {
   gameState: {
-    "1": { cellNo: "1", cellState: { coins: [] } },
+    "1": { cellNo: "1", cellState: { coins: ['p1Coin1'] } },
     "2": { cellNo: "2", cellState: { coins: [] } },
     "3": { cellNo: "3", cellState: { coins: [] } },
     "4": { cellNo: "4", cellState: { coins: [] } },
@@ -225,6 +257,41 @@ App.defaultProps = {
     "87": { cellNo: "p4hg4", cellState: { coins: [] } },
     "88": { cellNo: "p4hg5", cellState: { coins: [] } },
     "89": { cellNo: "home", cellState: { coins: [] } }
+  },
+  allCombination:{
+    "p1":[
+      "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+      "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+      "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+      "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
+      "41", "42", "43", "44", "45", "46", "47", "48", "49", "50",
+      "51", "69", "70", "71", "72", "73","89"
+    ],
+    "p2":[
+      "14", "15", "16", "17", "18", "19", "20",
+      "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+      "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
+      "41", "42", "43", "44", "45", "46", "47", "48", "49", "50",
+      "51", "52",
+      "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+      "74", "75", "76", "77", "78","89"
+    ],
+    "p3":[
+      "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", 
+      "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", 
+      "47", "48", "49", "50", "51", "52",
+      "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", 
+      "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+      "21", "22", "23", "24", "25",
+      "79", "80", "81", "82", "83","89"
+    ],
+    "p4":[
+      "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52",
+      "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", 
+      "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", 
+      "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38",
+      "84", "85", "86", "87", "88","89"
+    ]
   }
 };
 export default App;

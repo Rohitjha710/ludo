@@ -27,7 +27,7 @@ const Dice = ({ diceState, onDiceRoll }) => {
     <div className="dice-container">
       {loading ? 
 
-          <FaSquare size={50} className="spinning-dice" style={{ animationDuration: 's' }} />
+          <FaSquare size={50} className="spinning-dice" style={{borderRadius:'70%', animationDuration: '0.5s' }} />
        : (
         <>
           {diceState.value === "2" ? <FaDiceTwo size={50} /> : ""}
