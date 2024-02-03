@@ -24,7 +24,8 @@ const Dice = ({ diceState, onDiceRoll }) => {
   }, [diceState.value]);
 
   return (
-    <div className="dice-container">
+    <div className="dice-button-container">
+      <div className='dice-container'>
       {loading ? 
 
           <FaSquare size={50} className="spinning-dice" style={{borderRadius:'70%', animationDuration: '0.5s' }} />
@@ -43,13 +44,13 @@ const Dice = ({ diceState, onDiceRoll }) => {
           
         </>
       )}
+      </div>
       {diceState.canbeRolled ? (
         <button type="button" className="button-class" onClick={onDiceRoll}>
           Roll Dice
         </button>
-      ) : (
-        ""
-      )}
+      ) : ''
+      }
     </div>
   );
 };

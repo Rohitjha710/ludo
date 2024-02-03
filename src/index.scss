@@ -347,12 +347,18 @@ code {
     display: flex;
     flex-wrap: wrap;
   }
-  .dice-container{
+  .dice-button-container{
+    margin-left: 10px;
+    justify-content: end;
     height: 90px;
     background-color: burlywood;
     align-self: flex-end;
     display: flex;
     flex-direction: column;
+  }
+  .dice-container{
+    display: flex;
+    justify-content: space-around;
   }
   .button-class{
     -webkit-text-size-adjust: 100%;
@@ -445,6 +451,11 @@ code {
   }
   
   @media only screen and (max-width: 600px) {
+    .dice-button-container{
+      justify-content: end;
+      margin-left: 40%;
+      margin-top: 10px;
+    }
     .container-square {
       position: relative;
       max-width: 90vw;
