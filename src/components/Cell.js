@@ -13,14 +13,13 @@ const Cell = props => {
     yellow: "#FFCC00",
     red: "#FF0000"
   };
-  const coinColors = {
-    blue: "#336699",
-    green: "#006600",
-    yellow: "#CC9900",
-    red: "#990000"
-  };
+
   const arrowStyle = {
     color: colors[props.color]
+  };
+
+  const handleClick = () => {
+    props.handleCoinClick(props.gameState[props.id])
   };
 
   return (
@@ -64,6 +63,8 @@ const Cell = props => {
       )}
       {props.gameState[props.id].cellState.coins.length > 0 ? (
         <div
+        onClick={props.gameState[props.id].cellState.isClickable ? handleClick : null}
+
           className={`home-square-circle-coin cell-coin ${props.gameState[props.id].cellState.isClickable?'pulsating-effect':''} ${
             props.coinsState[props.gameState[props.id].cellState.coins[0]].color
           } `}
@@ -72,7 +73,8 @@ const Cell = props => {
             bottom: "15%",
             right: "13%",
             zIndex: 2,
-            fontSize: "10px"
+            fontSize: "10px",
+            cursor: props.gameState[props.id].cellState.isClickable ? 'pointer' : 'default'
           }}
 >
 </div>

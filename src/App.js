@@ -16,7 +16,7 @@ function App(props) {
   const player4Color = fourColor[(fourColor.indexOf(myColor) + 3) % 4];
 
   const coinsStateInitial = {
-    p1Coin1: { cellNo: "2", color: myColor },
+    p1Coin1: { cellNo: "p1h1", color: myColor },
     p1Coin2: { cellNo: "p1h2", color: myColor },
     p1Coin3: { cellNo: "p1h3", color: myColor },
     p1Coin4: { cellNo: "p1h4", color: myColor },
@@ -41,6 +41,7 @@ function App(props) {
     value: "",
     canbeRolled: true
   });
+  const [possibilities, changePossibiltiesArray] = useState({});
 
   const assignColorToAllCoins = color => {
     const player2Color = fourColor[(fourColor.indexOf(color) + 1) % 4];
@@ -112,16 +113,7 @@ function App(props) {
     return nextStateForCoins;
   };
 
-  const onclick = () => {
-    let changedGameState = { ...gameState };
-    let changedCoinState = { ...coinsState };
-    let diceValue = "6";
-    let player = "p1";
-    let postDiceRollPossibilities = getNextCellNumbersForAllCoins(
-      player,
-      diceValue
-    );
-    console.log(postDiceRollPossibilities);
+  const doPulsatingEffect =(postDiceRollPossibilities,player)=>{
     for (let i = 0; i <= 3; i++) {
       if (postDiceRollPossibilities[i]){
         changeGameState((prevGameState)=>{
@@ -131,44 +123,49 @@ function App(props) {
         })
       }
     }
-    return;
-    let cellNo = coinsState["p1Coin1"].cellNo;
-    let nextCellNo;
-    if (cellNo === "51") {
-      nextCellNo = "p1hg1";
-    } else if (cellNo === "p1hg5") {
-      nextCellNo = "home";
-    } else if (cellNo === "home") {
-      alert("not allowed coin is home");
-      return;
-    } else if (cellNo === "p1h1") {
-      nextCellNo = "1";
-    } else {
-      nextCellNo = gameState[parseInt(reverseCoinMap[cellNo]) + 1].cellNo;
-    }
+  }
 
-    changedGameState[reverseCoinMap[cellNo]] = {
-      ...changedGameState[reverseCoinMap[cellNo]],
-      cellState: { coins: [] }
-    };
-    changedGameState[reverseCoinMap[nextCellNo]] = {
-      ...changedGameState[reverseCoinMap[nextCellNo]],
-      cellState: { coins: ["p1Coin1"] }
-    };
-    changeGameState(prevGameState => {
-      return changedGameState;
-    });
-    changeCoinsState(prevCoinsState => {
-      const changedCoinState = { ...prevCoinsState };
-      changedCoinState["p1Coin1"] = { cellNo: nextCellNo, color: myColor };
-      return changedCoinState;
-    });
+  const onclick = () => {
+    let diceValue = "6";
+    let player = "p1";
+    let postDiceRollPossibilities = getNextCellNumbersForAllCoins(
+      player,
+      diceValue
+    );
+    changePossibiltiesArray({...postDiceRollPossibilities,"player":player})
+    doPulsatingEffect(postDiceRollPossibilities,player);
   };
 
   const onDiceRoll = () => {
     let diceValue = (Math.floor(Math.random() * 6) + 1).toString();
     changeDiceState({ ...diceState, value: diceValue });
   };
+
+  const handleCoinClick =(currentCell)=>{
+
+    let currentCellId = reverseCoinMap[currentCell.cellNo];
+    let currentCellNo = currentCell.cellNo;
+    let coinName=currentCell.cellState.coins.filter(coin=>coin.includes(possibilities.player))[0];
+    let nextCellNo=possibilities[parseInt(coinName.charAt(coinName.length - 1))-1];
+    let nextCellId =reverseCoinMap[nextCellNo];
+
+
+    changeGameState(prevGameState => {
+      let changedGameState ={...prevGameState};
+      //removes coin from current cell
+
+      changedGameState[currentCellId].cellState.coins = changedGameState[currentCellId].cellState.coins.filter(coin=>coin!==coinName);
+      //adds coin to the other cell
+      changedGameState[nextCellId].cellState.coins.push(coinName);
+      console.log(changedGameState)
+      return changedGameState;
+    });
+    changeCoinsState(prevCoinsState => {
+      const changedCoinState = { ...prevCoinsState };
+      changedCoinState[coinName].cellNo = nextCellNo;
+      return changedCoinState;
+    });
+  }
 
   return (
     <div className="App">
@@ -190,6 +187,7 @@ function App(props) {
             player2Color={player2Color}
             player3Color={player3Color}
             player4Color={player4Color}
+            handleCoinClick={handleCoinClick}
           />
           <Dice diceState={diceState} onDiceRoll={onDiceRoll} />
         </div>
@@ -202,7 +200,7 @@ function App(props) {
 App.defaultProps = {
   gameState: {
     "1": { cellNo: "1", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "2": { cellNo: "2", cellState: { coins: ['p1Coin1'],isClickable:false,colorOfCircle:'' } },
+    "2": { cellNo: "2", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
     "3": { cellNo: "3", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
     "4": { cellNo: "4", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
     "5": { cellNo: "5", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
@@ -253,22 +251,22 @@ App.defaultProps = {
     "50": { cellNo: "50", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
     "51": { cellNo: "51", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
     "52": { cellNo: "52", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "53": { cellNo: "p1h1", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "54": { cellNo: "p1h2", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "55": { cellNo: "p1h3", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "56": { cellNo: "p1h4", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "57": { cellNo: "p2h1", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "58": { cellNo: "p2h2", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "59": { cellNo: "p2h3", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "60": { cellNo: "p2h4", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "61": { cellNo: "p3h1", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "62": { cellNo: "p3h2", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "63": { cellNo: "p3h3", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "64": { cellNo: "p3h4", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "65": { cellNo: "p4h1", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "66": { cellNo: "p4h2", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "67": { cellNo: "p4h3", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
-    "68": { cellNo: "p4h4", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
+    "53": { cellNo: "p1h1", cellState: { coins: ['p1Coin1'],isClickable:false,colorOfCircle:'' } },
+    "54": { cellNo: "p1h2", cellState: { coins: ['p1Coin2'],isClickable:false,colorOfCircle:'' } },
+    "55": { cellNo: "p1h3", cellState: { coins: ['p1Coin3'],isClickable:false,colorOfCircle:'' } },
+    "56": { cellNo: "p1h4", cellState: { coins: ['p1Coin4'],isClickable:false,colorOfCircle:'' } },
+    "57": { cellNo: "p2h1", cellState: { coins: ['p2Coin1'],isClickable:false,colorOfCircle:'' } },
+    "58": { cellNo: "p2h2", cellState: { coins: ['p2Coin2'],isClickable:false,colorOfCircle:'' } },
+    "59": { cellNo: "p2h3", cellState: { coins: ['p2Coin3'],isClickable:false,colorOfCircle:'' } },
+    "60": { cellNo: "p2h4", cellState: { coins: ['p2Coin4'],isClickable:false,colorOfCircle:'' } },
+    "61": { cellNo: "p3h1", cellState: { coins: ['p3Coin1'],isClickable:false,colorOfCircle:'' } },
+    "62": { cellNo: "p3h2", cellState: { coins: ['p3Coin2'],isClickable:false,colorOfCircle:'' } },
+    "63": { cellNo: "p3h3", cellState: { coins: ['p3Coin3'],isClickable:false,colorOfCircle:'' } },
+    "64": { cellNo: "p3h4", cellState: { coins: ['p3Coin4'],isClickable:false,colorOfCircle:'' } },
+    "65": { cellNo: "p4h1", cellState: { coins: ['p4Coin1'],isClickable:false,colorOfCircle:'' } },
+    "66": { cellNo: "p4h2", cellState: { coins: ['p4Coin2'],isClickable:false,colorOfCircle:'' } },
+    "67": { cellNo: "p4h3", cellState: { coins: ['p4Coin3'],isClickable:false,colorOfCircle:'' } },
+    "68": { cellNo: "p4h4", cellState: { coins: ['p4Coin4'],isClickable:false,colorOfCircle:'' } },
 
     "69": { cellNo: "p1hg1", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
     "70": { cellNo: "p1hg2", cellState: { coins: [],isClickable:false,colorOfCircle:'' } },
