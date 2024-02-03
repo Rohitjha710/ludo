@@ -426,6 +426,23 @@ code {
     display: inline-block;
     animation: spin infinite linear;
   }
+  .pulsating-effect{
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(0.8);
+      box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+    }
+    50% {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 20px rgba(52, 152, 219, 0);
+    }
+    100% {
+      transform: scale(0.8);
+      box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    }
+  }
   
   @media only screen and (max-width: 600px) {
     .container-square {
