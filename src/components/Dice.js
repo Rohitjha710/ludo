@@ -21,7 +21,7 @@ const Dice = ({ diceState, onDiceRoll }) => {
     }, 400);
 
     return () => clearTimeout(timeout);
-  }, [diceState]);
+  }, [diceState.value]);
 
   return (
     <div className="dice-container">

@@ -113,12 +113,23 @@ function App(props) {
     return nextStateForCoins;
   };
 
-  const doPulsatingEffect =(postDiceRollPossibilities,player)=>{
+  const doPulsatingEffect =(postDiceRollPossibilities)=>{
     for (let i = 0; i <= 3; i++) {
       if (postDiceRollPossibilities[i]){
         changeGameState((prevGameState)=>{
           let newGameState = {...prevGameState};
-          newGameState[reverseCoinMap[coinsState[`${player}Coin${i+1}`].cellNo]].cellState.isClickable= true;
+          newGameState[reverseCoinMap[coinsState[`${postDiceRollPossibilities.player}Coin${i+1}`].cellNo]].cellState.isClickable= true;
+          return newGameState
+        })
+      }
+    }
+  }
+  const revertPulsatingEffect =(postDiceRollPossibilities)=>{
+    for (let i = 0; i <= 3; i++) {
+      if (postDiceRollPossibilities[i]){
+        changeGameState((prevGameState)=>{
+          let newGameState = {...prevGameState};
+          newGameState[reverseCoinMap[coinsState[`${postDiceRollPossibilities.player}Coin${i+1}`].cellNo]].cellState.isClickable= false;
           return newGameState
         })
       }
@@ -126,19 +137,24 @@ function App(props) {
   }
 
   const onclick = () => {
-    let diceValue = "6";
-    let player = "p1";
+
+  };
+
+  const onDiceRoll = () => {
+    let diceValue = (Math.floor(Math.random() * 6) + 1).toString();
+
+    let player = diceState.whoseChance;
     let postDiceRollPossibilities = getNextCellNumbersForAllCoins(
       player,
       diceValue
     );
     changePossibiltiesArray({...postDiceRollPossibilities,"player":player})
-    doPulsatingEffect(postDiceRollPossibilities,player);
-  };
-
-  const onDiceRoll = () => {
-    let diceValue = (Math.floor(Math.random() * 6) + 1).toString();
+    doPulsatingEffect({...postDiceRollPossibilities,player});
+    if(postDiceRollPossibilities[0]!=="" || postDiceRollPossibilities[1]!=="" || postDiceRollPossibilities[2]!=="" || postDiceRollPossibilities[3]!==""){
+   changeDiceState((prev)=>({...prev,value: diceValue,canbeRolled:false}))
+  }else{
     changeDiceState({ ...diceState, value: diceValue });
+  }
   };
 
   const handleCoinClick =(currentCell)=>{
@@ -157,7 +173,7 @@ function App(props) {
       changedGameState[currentCellId].cellState.coins = changedGameState[currentCellId].cellState.coins.filter(coin=>coin!==coinName);
       //adds coin to the other cell
       changedGameState[nextCellId].cellState.coins.push(coinName);
-      console.log(changedGameState)
+   
       return changedGameState;
     });
     changeCoinsState(prevCoinsState => {
@@ -165,6 +181,9 @@ function App(props) {
       changedCoinState[coinName].cellNo = nextCellNo;
       return changedCoinState;
     });
+    revertPulsatingEffect(possibilities);
+    changeDiceState((prev)=>({...prev,canbeRolled:true}))
+
   }
 
   return (
@@ -173,13 +192,6 @@ function App(props) {
 
       {colorChoosen ? (
         <div className="board-and-dice">
-          <button onClick={onclick}>Click</button>
-          <input
-            value={tempInput}
-            onChange={e => {
-              changeTempInput(e.target.value);
-            }}
-          />
           <Container
             myColor={myColor}
             gameState={gameState}
