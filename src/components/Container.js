@@ -18,7 +18,7 @@ const Container = ({myColor,gameState,coinsState,player2Color,player3Color,playe
 
 
       <LeftPassage color={player2} gameState={gameState} coinsState={coinsState} handleCoinClick={handleCoinClick}/>
-     <AllHome color={myColor} gameState={gameState} coinsState={coinsState} handleCoinClick={handleCoinClick}/> 
+     <AllHome color={myColor} player2Color={player2Color} player3Color={player3Color} player4Color={player4Color} gameState={gameState} coinsState={coinsState} /> 
       <RightPassage color={player4} gameState={gameState} coinsState={coinsState} handleCoinClick={handleCoinClick}/>
 
 

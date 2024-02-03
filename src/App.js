@@ -16,10 +16,10 @@ function App(props) {
   const player4Color = fourColor[(fourColor.indexOf(myColor) + 3) % 4];
 
   const coinsStateInitial = {
-    p1Coin1: { cellNo: "p1h1", color: myColor },
-    p1Coin2: { cellNo: "p1h2", color: myColor },
-    p1Coin3: { cellNo: "p1h3", color: myColor },
-    p1Coin4: { cellNo: "p1h4", color: myColor },
+    p1Coin1: { cellNo: "home", color: myColor },
+    p1Coin2: { cellNo: "home", color: myColor },
+    p1Coin3: { cellNo: "home", color: myColor },
+    p1Coin4: { cellNo: "home", color: myColor },
     p2Coin1: { cellNo: "p2h1", color: player2Color },
     p2Coin2: { cellNo: "p2h2", color: player2Color },
     p2Coin3: { cellNo: "p2h3", color: player2Color },
