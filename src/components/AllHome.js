@@ -2,7 +2,7 @@ const AllHome = props => {
   const getCoinsInHomeForPlayer = player => {
     let coins = [];
     for (let i = 1; i <= 4; i++) {
-      if (props.coinsState[`${player}Coin${1}`].cellNo === "home") {
+      if (props.coinsState[`${player}Coin${i}`].cellNo === "home") {
         coins.push('1');
       }
     }
@@ -17,12 +17,12 @@ const AllHome = props => {
     <div className="home-container-all" style={{ position: "relative" }}>
       <div className={`home-colors ${props.color}`}>
         {p1Coins.length>0 ? (
-          <div style={{ position: "absolute", bottom: "5%", right: "23%",display:"flex" }}>
-            {p1Coins.map(eachP1Coin=>(
+          <div className="all-home-coins-container" style={{ position: "absolute", bottom: "5%", right: "23%",display:"flex" }}>
+            {p1Coins.map((eachP1Coin,index)=>(
             
-              <div
-                className={`home-square-circle-coin cell-coin ${props.color}`}
-                style={{ zIndex: 2, width: "10px", height: "10px" }}
+              <div key={index}
+                className={`home-square-circle-coin cell-coin cell-cize ${props.color}`}
+                style={{ zIndex: 2 }}
               ></div>
             )
             )}
