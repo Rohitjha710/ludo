@@ -188,7 +188,7 @@ function App(props) {
 
   return (
     <div className="App">
-      <h1 className="display-1 text-center gray">Ludo by Rohit</h1>
+      <h1 className="display-1 text-center gray">Ludo by Rohit Jha</h1>
 
       {colorChoosen ? (
         <div className="board-and-dice">
