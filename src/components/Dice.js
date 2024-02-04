@@ -5,11 +5,12 @@ import {
   FaDiceFour,
   FaDiceFive,
   FaDiceSix,
-  FaSquare
+  FaSquare,
+  FaArrowRight
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
-const Dice = ({ diceState, onDiceRoll }) => {
+const Dice = ({ diceState, onDiceRoll,myColor,player3Color }) => {
   const [loading, setLoading] = useState(true);
   const [value, setValue] = useState(null);
 
@@ -24,6 +25,7 @@ const Dice = ({ diceState, onDiceRoll }) => {
   }, [diceState.value]);
 
   return (
+    <>
     <div className="dice-button-container">
       <div className='dice-container'>
       {loading ? 
@@ -52,6 +54,11 @@ const Dice = ({ diceState, onDiceRoll }) => {
       ) : ''
       }
     </div>
+       {/* <div className="arrow-container">
+    <p>{diceState.whoseChance==='p1'?'Player 1':"Player 3"}</p>
+       <FaArrowRight className="arrow-icon" style={{color:diceState.whoseChance==='p1'?myColor:player3Color}}/>
+     </div> */}
+     </>
   );
 };
 

@@ -6,8 +6,8 @@ import { reverseCoinMap } from "./utils/utils";
 function App(props) {
   // set colorChossen to false
 
-  const [myColor, changeMyColor] = useState("red");
-  const [colorChoosen, setPlayer1Color] = useState(true);
+  const [myColor, changeMyColor] = useState('red');
+  const [colorChoosen, setPlayer1Color] = useState(false);
   const [gameState, changeGameState] = useState(props.gameState);
 
   const fourColor = ["red", "green", "yellow", "blue"];
@@ -151,9 +151,9 @@ function App(props) {
     changePossibiltiesArray({...postDiceRollPossibilities,"player":player})
     doPulsatingEffect({...postDiceRollPossibilities,player});
     if(postDiceRollPossibilities[0]!=="" || postDiceRollPossibilities[1]!=="" || postDiceRollPossibilities[2]!=="" || postDiceRollPossibilities[3]!==""){
-   changeDiceState((prev)=>({...prev,value: diceValue,canbeRolled:false}))
+   changeDiceState((prev)=>({...prev,value: diceValue,canbeRolled:false,whoseChance:prev.whoseChance==='p1'?'p3':'p1'}))
   }else{
-    changeDiceState({ ...diceState, value: diceValue });
+    changeDiceState((prev)=>({ ...diceState, value: diceValue,whoseChance:prev.whoseChance==='p1'?'p3':'p1' }));
   }
   };
 
@@ -201,7 +201,7 @@ function App(props) {
             player4Color={player4Color}
             handleCoinClick={handleCoinClick}
           />
-          <Dice diceState={diceState} onDiceRoll={onDiceRoll} />
+          <Dice diceState={diceState} onDiceRoll={onDiceRoll} myColor={myColor} player2Color={player2Color} player3Color={player3Color} player4Color={player4Color} />
         </div>
       ) : (
         <ChooseColor chooseColor={chooseColor} />

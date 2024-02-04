@@ -455,12 +455,39 @@ code {
   }
   
   @media only screen and (max-width: 600px) {
+    .form-mobile{
+      font-size: 15px!important;
+    }
+    .form-container {
+      width: 48%;
+      background-color: honeydew;
+      display: flex;
+      padding: 20px;
+      border: 10px solid brown;
+      font-size: 20px;
+      flex-direction: column;
+      display: flex;
+      margin-left: 28px;
+  }
     .cell-cize{
       width: 7px!important;
        height: 7px!important;
     }
-    .all-home-coins-container{
+    .all-home-coins-container-player1{
       right: 15%!important;
+    }
+    .all-home-coins-container-player2{
+      top: 10%!important;
+      left: -2%!important;
+    }
+    .all-home-coins-container-player3{
+      top: -2%!important;
+    right: 17%!important;
+    }
+    .all-home-coins-container-player4{
+      top: 10%!important;
+      right: 2%!important;
+  
     }
     .dice-button-container{
       justify-content: end;

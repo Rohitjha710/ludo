@@ -19,7 +19,7 @@ const ChooseColor = ({chooseColor}) => {
       <Form onSubmit={handleSubmit}>
       <Form.Group controlId="exampleForm.SelectCustom">
         <Form.Label>Select an option:</Form.Label>
-        <Form.Control as="select" custom onChange={handleSelectChange} value={selectedOption} style={{fontSize:'20px'}}>
+        <Form.Control as="select" className="form-mobile" custom onChange={handleSelectChange} value={selectedOption} style={{fontSize:'20px'}}>
         <option value="">Open this select menu</option>
           <option value="red">Red</option>
           <option value="green">Green</option>
