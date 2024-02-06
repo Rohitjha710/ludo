@@ -226,25 +226,25 @@ function App(props) {
 
   const checkForWinner = ()=>{
   
-    if(gameState['p1Coin1'].cellNo==='home' && gameState['p1Coin2'].cellNo==='home' && gameState['p1Coin3'].cellNo==='home' && gameState['p1Coin4'].cellNo==='home')
+    if(coinsState['p1Coin1'].cellNo==='home' && coinsState['p1Coin2'].cellNo==='home' && coinsState['p1Coin3'].cellNo==='home' && coinsState['p1Coin4'].cellNo==='home')
     {
       setWinner('1');
     }
-    if(gameState['p2Coin1'].cellNo==='home' && gameState['p2Coin2'].cellNo==='home' && gameState['p2Coin3'].cellNo==='home' && gameState['p2Coin4'].cellNo==='home')
+    if(coinsState['p2Coin1'].cellNo==='home' && coinsState['p2Coin2'].cellNo==='home' && coinsState['p2Coin3'].cellNo==='home' && coinsState['p2Coin4'].cellNo==='home')
     {
       setWinner('2');
     }
-    if(gameState['p3Coin1'].cellNo==='home' && gameState['p3Coin2'].cellNo==='home' && gameState['p3Coin3'].cellNo==='home' && gameState['p3Coin4'].cellNo==='home')
+    if(coinsState['p3Coin1'].cellNo==='home' && coinsState['p3Coin2'].cellNo==='home' && coinsState['p3Coin3'].cellNo==='home' && coinsState['p3Coin4'].cellNo==='home')
     {
       setWinner('3');
     }
-    if(gameState['p4Coin1'].cellNo==='home' && gameState['p4Coin2'].cellNo==='home' && gameState['p4Coin3'].cellNo==='home' && gameState['p4Coin4'].cellNo==='home')
+    if(coinsState['p4Coin1'].cellNo==='home' && coinsState['p4Coin2'].cellNo==='home' && coinsState['p4Coin3'].cellNo==='home' && coinsState['p4Coin4'].cellNo==='home')
     {
       setWinner('4');
     }
    
   }
-
+  checkForWinner()
   const [winner,setWinner] = useState('');
   //checkForWinner
   return (
