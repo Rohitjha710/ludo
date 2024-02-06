@@ -36,7 +36,7 @@ function App(props) {
     p4Coin3: { cellNo: "p4h3", color: player4Color },
     p4Coin4: { cellNo: "p4h4", color: player4Color }
   };
-  const safeCells =['1','48','9','14','22','27','35','40','48'];
+  const safeCells =['1','48','9','14','22','27','35','40','48','89'];
 
   const [tempInput, changeTempInput] = useState("");
   const [coinsState, changeCoinsState] = useState(coinsStateInitial);
