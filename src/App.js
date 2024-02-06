@@ -224,8 +224,7 @@ function App(props) {
     changeDiceState((prev)=>({...prev,whoseChance:prev.value==='6'||kill?prev.whoseChance:(prev.whoseChance==='p1'?'p3':'p1'),canbeRolled:true}))
   }
 
-  const checkForWinner = ()=>{
-  
+  useEffect(()=>{
     if(coinsState['p1Coin1'].cellNo==='home' && coinsState['p1Coin2'].cellNo==='home' && coinsState['p1Coin3'].cellNo==='home' && coinsState['p1Coin4'].cellNo==='home')
     {
       setWinner('1');
@@ -242,9 +241,8 @@ function App(props) {
     {
       setWinner('4');
     }
-   
-  }
-  checkForWinner()
+  },[coinsState])
+  
   const [winner,setWinner] = useState('');
   //checkForWinner
   return (
@@ -253,8 +251,8 @@ function App(props) {
 
       {colorChoosen ? (
         <div className="board-and-dice">
-         {winner && <><FireWorks winner='p1'/>
-          <WinnerAlert winner={winner}/></>}
+         {winner ? <><FireWorks winner='p1'/>
+          <WinnerAlert winner={winner}/></>:''}
           <Container
             myColor={myColor}
             gameState={gameState}
