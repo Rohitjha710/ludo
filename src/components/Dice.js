@@ -12,8 +12,7 @@ import { useState, useEffect } from "react";
 
 const Dice = ({ diceState, onDiceRoll,myColor,player3Color }) => {
   const [loading, setLoading] = useState(true);
-  const [value, setValue] = useState(null);
-
+  const diceCurrentColor = diceState.whoseChance=='p1'?myColor:player3Color
   useEffect(() => {
     // Show loading for 1 second
     setLoading(true);
@@ -33,22 +32,22 @@ const Dice = ({ diceState, onDiceRoll,myColor,player3Color }) => {
           <FaSquare size={50} className="spinning-dice" style={{borderRadius:'70%', animationDuration: '0.5s' }} />
        : (
         <>
-          {diceState.value === "2" ? <FaDiceTwo size={50} /> : ""}
-          {diceState.value === "3" ? <FaDiceThree size={50} /> : ""}
-          {diceState.value === "4" ? <FaDiceFour size={50} /> : ""}
-          {diceState.value === "5" ? <FaDiceFive size={50} /> : ""}
-          {diceState.value === "6" ? <FaDiceSix size={50} /> : ""}
+          {diceState.value === "2" ? <FaDiceTwo size={50}  style={{backgroundColor:diceCurrentColor,color:'black'}}/> : ""}
+          {diceState.value === "3" ? <FaDiceThree size={50} style={{backgroundColor:diceCurrentColor,color:'black'}} /> : ""}
+          {diceState.value === "4" ? <FaDiceFour size={50} style={{backgroundColor:diceCurrentColor,color:'black'}} /> : ""}
+          {diceState.value === "5" ? <FaDiceFive size={50} style={{backgroundColor:diceCurrentColor,color:'black'}} /> : ""}
+          {diceState.value === "6" ? <FaDiceSix size={50} style={{backgroundColor:diceCurrentColor,color:'black'}} /> : ""}
           {diceState.value === "1" || diceState.value === "" ? (
-            <FaDiceOne size={50} />
+            <FaDiceOne size={50} style={{backgroundColor:diceCurrentColor,color:'black'}} />
           ) : (
             ""
           )}
           
         </>
       )}
-      </div>
+      </div>  
       {diceState.canbeRolled ? (
-        <button type="button" className="button-class" onClick={onDiceRoll}>
+        <button type="button" className="button-class" style={{backgroundColor:diceCurrentColor,color:'black'}} onClick={onDiceRoll}>
           Roll Dice
         </button>
       ) : ''

@@ -149,10 +149,12 @@ function App(props) {
       diceValue
     );
     changePossibiltiesArray({...postDiceRollPossibilities,"player":player})
-    doPulsatingEffect({...postDiceRollPossibilities,player});
     if(postDiceRollPossibilities[0]!=="" || postDiceRollPossibilities[1]!=="" || postDiceRollPossibilities[2]!=="" || postDiceRollPossibilities[3]!==""){
-   changeDiceState((prev)=>({...prev,value: diceValue,canbeRolled:false,whoseChance:prev.whoseChance==='p1'?'p3':'p1'}))
+   //player has to mke a move
+   doPulsatingEffect({...postDiceRollPossibilities,player});
+  changeDiceState((prev)=>({...prev,value: diceValue,canbeRolled:false}))
   }else{
+    //player cannot make a move
     changeDiceState((prev)=>({ ...diceState, value: diceValue,whoseChance:prev.whoseChance==='p1'?'p3':'p1' }));
   }
   };
@@ -181,9 +183,10 @@ function App(props) {
       changedCoinState[coinName].cellNo = nextCellNo;
       return changedCoinState;
     });
+    
     revertPulsatingEffect(possibilities);
-    changeDiceState((prev)=>({...prev,canbeRolled:true}))
-
+  
+    changeDiceState((prev)=>({...prev,whoseChance:prev.value==='6'?prev.whoseChance:(prev.whoseChance==='p1'?'p3':'p1'),canbeRolled:true}))
   }
 
   return (
