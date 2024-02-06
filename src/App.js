@@ -199,6 +199,11 @@ function App(props) {
       if(kill){
         //pop everything and keep only the current player
         changedGameState[nextCellId].cellState.coins=[coinName];
+
+        //insert the killed coin the home cell
+      for (let coin of killedCoinNames){
+        changedGameState[reverseCoinMap[`${coin.substring(0, 2)}h${coin[coin.length-1]}`]].cellState.coins=[coin];
+      }
       }
       else{
         //adds coin to the other cell
