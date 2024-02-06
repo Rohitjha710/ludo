@@ -1,6 +1,9 @@
 import Container from "./components/Container";
 import ChooseColor from "./components/ChooseColor";
 import Dice from "./components/Dice";
+import FireWorks from './components/Fireworks';
+import WinnerAlert from './components/WinnerAlert';
+
 import { useState, useEffect } from "react";
 import { reverseCoinMap } from "./utils/utils";
 function App(props) {
@@ -221,12 +224,37 @@ function App(props) {
     changeDiceState((prev)=>({...prev,whoseChance:prev.value==='6'||kill?prev.whoseChance:(prev.whoseChance==='p1'?'p3':'p1'),canbeRolled:true}))
   }
 
+  const checkForWinner = ()=>{
+  
+    if(gameState['p1Coin1'].cellNo==='home' && gameState['p1Coin2'].cellNo==='home' && gameState['p1Coin3'].cellNo==='home' && gameState['p1Coin4'].cellNo==='home')
+    {
+      setWinner('1');
+    }
+    if(gameState['p2Coin1'].cellNo==='home' && gameState['p2Coin2'].cellNo==='home' && gameState['p2Coin3'].cellNo==='home' && gameState['p2Coin4'].cellNo==='home')
+    {
+      setWinner('2');
+    }
+    if(gameState['p3Coin1'].cellNo==='home' && gameState['p3Coin2'].cellNo==='home' && gameState['p3Coin3'].cellNo==='home' && gameState['p3Coin4'].cellNo==='home')
+    {
+      setWinner('3');
+    }
+    if(gameState['p4Coin1'].cellNo==='home' && gameState['p4Coin2'].cellNo==='home' && gameState['p4Coin3'].cellNo==='home' && gameState['p4Coin4'].cellNo==='home')
+    {
+      setWinner('4');
+    }
+   
+  }
+
+  const [winner,setWinner] = useState('');
+  //checkForWinner
   return (
     <div className="App">
       <h1 className="display-1 text-center gray">Ludo by Rohit Jha</h1>
 
       {colorChoosen ? (
         <div className="board-and-dice">
+         {winner && <><FireWorks winner='p1'/>
+          <WinnerAlert winner={winner}/></>}
           <Container
             myColor={myColor}
             gameState={gameState}
