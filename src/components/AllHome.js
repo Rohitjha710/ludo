@@ -12,7 +12,6 @@ const AllHome = props => {
   const p2Coins = getCoinsInHomeForPlayer("p2");
   const p3Coins = getCoinsInHomeForPlayer("p3");
   const p4Coins = getCoinsInHomeForPlayer("p4");
-  console.log(p1Coins,p2Coins,p3Coins,p4Coins)
   return (
     <div className="home-container-all" style={{ position: "relative" }}>
       <div className={`home-colors ${props.color}`}>
