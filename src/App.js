@@ -10,7 +10,7 @@ function App(props) {
   // set colorChossen to false
 
   const [myColor, changeMyColor] = useState('red');
-  const [colorChoosen, setPlayer1Color] = useState(true);
+  const [colorChoosen, setPlayer1Color] = useState(false);
   const [gameState, changeGameState] = useState(props.gameState);
 
   const fourColor = ["red", "green", "yellow", "blue"];
@@ -242,7 +242,7 @@ function App(props) {
       setWinner('4');
     }
   },[coinsState])
-  
+
   const [winner,setWinner] = useState('');
   //checkForWinner
   return (
