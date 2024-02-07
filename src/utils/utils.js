@@ -92,8 +92,7 @@ export const reverseCoinMap={
 
 export const playAudio =(url)=>{
   const audio = new Audio(url);
-  console.log(audio);
-  audio.play().then(a=>console.log(a)).catch(e=>console.log('errorororo',e));
+  audio.play().then(a=>{}).catch(e=>{})
   
   audio.onended = () => {
       // Once the audio ends, remove the event listener and pause the audio

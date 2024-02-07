@@ -171,7 +171,6 @@ function App(props) {
 
   const checkIfItsAKill =(nextCellId)=>{
     let kill= false;
-    console.log(nextCellId,gameState[nextCellId])
     //checks if coins array isgreater then zero, the cell is not a safe cell, the coin present is not ofsame color
      if(gameState[nextCellId].cellState.coins.length>0 && !(safeCells.includes(nextCellId)) && gameState[nextCellId].cellState.coins.some(coin=>!coin.includes(possibilitiesAndCurrentPlayer.player)))
      {
@@ -180,9 +179,20 @@ function App(props) {
      return kill;
 
   }
+  function delay(seconds) {
+    return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+  }
+
+  const handleSmoothTransitionOfCoins = async (initial,final,diceValue,player)=>{
+    for(let i=1;i<=parseInt(diceValue);i++){
+      await delay(0.2);
+      playAudio(coinAudio);
+    }
+    return "true";
+  }
 
 
-  const handleCoinClick =(currentCell)=>{
+  const handleCoinClick = async (currentCell)=>{
 
     let currentCellId = reverseCoinMap[currentCell.cellNo];
     let currentCellNo = currentCell.cellNo;
@@ -191,22 +201,24 @@ function App(props) {
     let nextCellId =reverseCoinMap[nextCellNo];
 
     let kill = false;
-    let killedCoinNames = ''
+    let killedCoinNames = '';
+    let homeLeave=false;
+
+    if(['h1','h2','h3','h4'].some((ele)=>currentCellNo.includes(ele))){
+      playAudio(hurrayAudio);
+      homeLeave=true;
+    }
+    if(nextCellId==='89'){
+      playAudio(hurrayAudio);
+    }
+    if(!homeLeave){
+      await handleSmoothTransitionOfCoins(currentCellId,nextCellId,diceState.value,possibilitiesAndCurrentPlayer.player)}
     if(checkIfItsAKill(nextCellId)){
       kill=true;
       killedCoinNames=gameState[nextCellId].cellState.coins;
       playAudio(killAudio);
     }
 
-    else if(['h1','h2','h3','h4'].some((ele)=>currentCellNo.includes(ele))){
-      playAudio(hurrayAudio);
-    }
-    else if(nextCellId==='89'){
-      playAudio(hurrayAudio);
-    }
-    else{
-      playAudio(coinAudio);
-    }
     changeGameState(prevGameState => {
       let changedGameState ={...prevGameState};
       //removes coin from current cell
