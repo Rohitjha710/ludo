@@ -26,7 +26,7 @@ const Dice = ({ diceState, onDiceRoll, myColor, player3Color }) => {
 
   return (
     <>
-      <div className="dice-button-container">
+      <div className="dice-button-container" onClick={diceState.canbeRolled ?onDiceRoll:null} style={{cursor:'pointer'}}>
         <div className="dice-container">
           {loading ? (
             <FaSquare
@@ -74,7 +74,6 @@ const Dice = ({ diceState, onDiceRoll, myColor, player3Color }) => {
             type="button"
             className="button-class"
             style={{ backgroundColor: diceCurrentColor, color: "black" }}
-            onClick={onDiceRoll}
           >
             Roll Dice (पासा फेंकें)
           </button>
