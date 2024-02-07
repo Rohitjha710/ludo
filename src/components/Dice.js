@@ -76,10 +76,16 @@ const Dice = ({ diceState, onDiceRoll, myColor, player3Color }) => {
             style={{ backgroundColor: diceCurrentColor, color: "black" }}
             onClick={onDiceRoll}
           >
-            Roll Dice
+            Roll Dice (पासा फेंकें)
           </button>
         ) : (
-          ""
+          <button
+          type="button"
+          className="button-class"
+          style={{ backgroundColor: diceCurrentColor, color: "black" }}
+        >
+          Play coin first (अपने सिक्के को चले)
+        </button>
         )}
       </div>
       {/* <div className="arrow-container">
