@@ -283,8 +283,7 @@ function App(props) {
 
 
   useEffect(()=>{
-    playAudio(fireworksAudio);
-    setWinner('1')
+
     if(coinsState['p1Coin1'].cellNo==='home' && coinsState['p1Coin2'].cellNo==='home' && coinsState['p1Coin3'].cellNo==='home' && coinsState['p1Coin4'].cellNo==='home')
     {
       setWinner('1');
