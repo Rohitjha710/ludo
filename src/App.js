@@ -20,6 +20,7 @@ function App(props) {
   const [myColor, changeMyColor] = useState('red');
   const [colorChoosen, setPlayer1Color] = useState(false);
   const [gameState, changeGameState] = useState(props.gameState);
+  const [coinEffectinProgress, changeCoinEffect] = useState(false);
 
   const fourColor = ["red", "green", "yellow", "blue"];
   const player2Color = fourColor[(fourColor.indexOf(myColor) + 1) % 4];
@@ -215,7 +216,9 @@ function App(props) {
 
 
   const handleCoinClick = async (currentCell)=>{
-
+    
+    if(coinEffectinProgress){return;}
+    changeCoinEffect(true);
     let currentCellId = reverseCoinMap[currentCell.cellNo];
     let currentCellNo = currentCell.cellNo;
     let coinName=currentCell.cellState.coins.filter(coin=>coin.includes(possibilitiesAndCurrentPlayer.player))[0];
@@ -277,7 +280,7 @@ function App(props) {
     });
     
     revertPulsatingEffect(possibilitiesAndCurrentPlayer);
-  
+    changeCoinEffect(false);
     changeDiceState((prev)=>({...prev,whoseChance:prev.value==='6'||kill||nextCellId==='89'?prev.whoseChance:(prev.whoseChance==='p1'?'p3':'p1'),canbeRolled:true}))
   }
 
