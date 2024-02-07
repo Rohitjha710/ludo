@@ -5,6 +5,12 @@ import FireWorks from './components/Fireworks';
 import WinnerAlert from './components/WinnerAlert';
 import Footer from './components/Footer';
 
+import coinAudio from './assets/audio/coin.mp3';
+import killAudio from './assets/audio/kill.mp3';
+import hurrayAudio from './assets/audio/hurray.mp3';
+import diceAudio from './assets/audio/dice.mp3';
+import gameStart from './assets/audio/gameStart.mp3';
+
 import { useState, useEffect } from "react";
 import { reverseCoinMap,playAudio } from "./utils/utils";
 function App(props) {
@@ -49,8 +55,8 @@ function App(props) {
   const [possibilitiesAndCurrentPlayer, changePossibiltiesArray] = useState({});
 
   const assignColorToAllCoins = color => {
-    // playAudio('https://assets.mixkit.co/active_storage/sfx/216/216-preview.mp3');
-    playAudio('coin');
+    playAudio(gameStart);
+
     const player2Color = fourColor[(fourColor.indexOf(color) + 1) % 4];
     const player3Color = fourColor[(fourColor.indexOf(color) + 2) % 4];
     const player4Color = fourColor[(fourColor.indexOf(color) + 3) % 4];
@@ -145,6 +151,7 @@ function App(props) {
 
 
   const onDiceRoll = () => {
+    playAudio(diceAudio);
     let diceValue = (Math.floor(Math.random() * 6) + 1).toString();
     let player = diceState.whoseChance;
     let postDiceRollPossibilities = getNextCellNumbersForAllCoins(
@@ -186,11 +193,19 @@ function App(props) {
     let kill = false;
     let killedCoinNames = ''
     if(checkIfItsAKill(nextCellId)){
-      console.log('its a kill');
       kill=true;
       killedCoinNames=gameState[nextCellId].cellState.coins;
-      console.log(kill,killedCoinNames);
-      // return;
+      playAudio(killAudio);
+    }
+
+    else if(['h1','h2','h3','h4'].some((ele)=>currentCellNo.includes(ele))){
+      playAudio(hurrayAudio);
+    }
+    else if(nextCellId==='89'){
+      playAudio(hurrayAudio);
+    }
+    else{
+      playAudio(coinAudio);
     }
     changeGameState(prevGameState => {
       let changedGameState ={...prevGameState};

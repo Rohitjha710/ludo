@@ -91,7 +91,7 @@ export const reverseCoinMap={
   }
 
 export const playAudio =(url)=>{
-  const audio = new Audio(`../assets/audio/${url}.mp3`);
+  const audio = new Audio(url);
   console.log(audio);
   audio.play().then(a=>console.log(a)).catch(e=>console.log('errorororo',e));
   
