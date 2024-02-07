@@ -10,6 +10,7 @@ import killAudio from './assets/audio/kill.mp3';
 import hurrayAudio from './assets/audio/hurray.mp3';
 import diceAudio from './assets/audio/dice.mp3';
 import gameStart from './assets/audio/gameStart.mp3';
+import fireworksAudio from './assets/audio/fireworks.mp3';
 
 import { useState, useEffect } from "react";
 import { reverseCoinMap,playAudio } from "./utils/utils";
@@ -280,26 +281,33 @@ function App(props) {
     changeDiceState((prev)=>({...prev,whoseChance:prev.value==='6'||kill||nextCellId==='89'?prev.whoseChance:(prev.whoseChance==='p1'?'p3':'p1'),canbeRolled:true}))
   }
 
+
   useEffect(()=>{
+
     if(coinsState['p1Coin1'].cellNo==='home' && coinsState['p1Coin2'].cellNo==='home' && coinsState['p1Coin3'].cellNo==='home' && coinsState['p1Coin4'].cellNo==='home')
     {
       setWinner('1');
+      playAudio(fireworksAudio)
     }
     if(coinsState['p2Coin1'].cellNo==='home' && coinsState['p2Coin2'].cellNo==='home' && coinsState['p2Coin3'].cellNo==='home' && coinsState['p2Coin4'].cellNo==='home')
     {
       setWinner('2');
+      playAudio(fireworksAudio)
     }
     if(coinsState['p3Coin1'].cellNo==='home' && coinsState['p3Coin2'].cellNo==='home' && coinsState['p3Coin3'].cellNo==='home' && coinsState['p3Coin4'].cellNo==='home')
     {
       setWinner('3');
+      playAudio(fireworksAudio)
     }
     if(coinsState['p4Coin1'].cellNo==='home' && coinsState['p4Coin2'].cellNo==='home' && coinsState['p4Coin3'].cellNo==='home' && coinsState['p4Coin4'].cellNo==='home')
     {
       setWinner('4');
+      playAudio(fireworksAudio)
     }
   },[coinsState])
 
   const [winner,setWinner] = useState('');
+
   //checkForWinner
   return (
     <div className="App">
