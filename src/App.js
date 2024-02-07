@@ -3,6 +3,7 @@ import ChooseColor from "./components/ChooseColor";
 import Dice from "./components/Dice";
 import FireWorks from './components/Fireworks';
 import WinnerAlert from './components/WinnerAlert';
+import Footer from './components/Footer';
 
 import { useState, useEffect } from "react";
 import { reverseCoinMap } from "./utils/utils";
@@ -252,7 +253,6 @@ function App(props) {
   //checkForWinner
   return (
     <div className="App">
-      <h1 className="display-1 text-center gray">Ludo by Rohit Jha</h1>
 
       {colorChoosen ? (
         <div className="board-and-dice">
@@ -272,6 +272,7 @@ function App(props) {
       ) : (
         <ChooseColor chooseColor={chooseColor} />
       )}
+      <Footer/>
     </div>
   );
 }
