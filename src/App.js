@@ -94,9 +94,7 @@ function App(props) {
       let currentIndexOfCoinInJourney = props.allCombination[player].indexOf(
         reverseCoinMap[currentCellNoOftheCoin]
       );
-      // console.log(player,i+1)
-      // console.log('currentcelnno',currentCellNoOftheCoin)
-      // console.log('currentindexinjounery',currentIndexOfCoinInJourney)
+
       if (currentCellNoOftheCoin === "home") {
         nextStateForCoins[`${i}`] = "";
       } else if (
@@ -121,7 +119,6 @@ function App(props) {
         nextStateForCoins[`${i}`] = "";
       }
 
-      // console.log('-------');
     }
     return nextStateForCoins;
   };
@@ -183,10 +180,34 @@ function App(props) {
     return new Promise(resolve => setTimeout(resolve, seconds * 1000));
   }
 
-  const handleSmoothTransitionOfCoins = async (initial,final,diceValue,player)=>{
+  const handleSmoothTransitionOfCoins = async (initial,final,diceValue,player,coinName)=>{
+
+    let initialIndexInJourney = props.allCombination[player].indexOf(initial);
     for(let i=1;i<=parseInt(diceValue);i++){
       await delay(0.2);
       playAudio(coinAudio);
+
+      //pop form current      
+       //put into next
+        changeGameState((prev)=>{
+          let tempGameState= {...prev};
+          // console.log(tempGameState[])
+          try{
+          if(props.allCombination[player][initialIndexInJourney+i]!==final){
+            tempGameState[props.allCombination[player][initialIndexInJourney+i]].cellState.coins.push(coinName);
+          }
+
+          tempGameState[props.allCombination[player][initialIndexInJourney+i-1]].cellState.coins = tempGameState[props.allCombination[player][initialIndexInJourney+i-1]].cellState.coins.filter(coin=>coin!==coinName);
+        }catch(e){
+          console.log(initialIndexInJourney,'initialIndexInJourney');
+          console.log(i,'i');
+          console.log(props.allCombination[player][initialIndexInJourney+i-1],'currenCellNo')
+          console.log(tempGameState,'gamestate');
+          console.log(e);
+        }
+          return tempGameState;
+        })
+
     }
     return "true";
   }
@@ -202,17 +223,18 @@ function App(props) {
 
     let kill = false;
     let killedCoinNames = '';
-    let homeLeave=false;
-
+    
     if(['h1','h2','h3','h4'].some((ele)=>currentCellNo.includes(ele))){
       playAudio(hurrayAudio);
-      homeLeave=true;
     }
+    else{
+      await handleSmoothTransitionOfCoins(currentCellId,nextCellId,diceState.value,possibilitiesAndCurrentPlayer.player,coinName)
+    }
+    console.log('resumed');
+
     if(nextCellId==='89'){
       playAudio(hurrayAudio);
     }
-    if(!homeLeave){
-      await handleSmoothTransitionOfCoins(currentCellId,nextCellId,diceState.value,possibilitiesAndCurrentPlayer.player)}
     if(checkIfItsAKill(nextCellId)){
       kill=true;
       killedCoinNames=gameState[nextCellId].cellState.coins;
