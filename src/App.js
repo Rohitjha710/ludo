@@ -190,7 +190,6 @@ function App(props) {
       console.log(kill,killedCoinNames);
       // return;
     }
-    console.log('reached here also');
     changeGameState(prevGameState => {
       let changedGameState ={...prevGameState};
       //removes coin from current cell
@@ -227,7 +226,7 @@ function App(props) {
     
     revertPulsatingEffect(possibilitiesAndCurrentPlayer);
   
-    changeDiceState((prev)=>({...prev,whoseChance:prev.value==='6'||kill?prev.whoseChance:(prev.whoseChance==='p1'?'p3':'p1'),canbeRolled:true}))
+    changeDiceState((prev)=>({...prev,whoseChance:prev.value==='6'||kill||nextCellId==='89'?prev.whoseChance:(prev.whoseChance==='p1'?'p3':'p1'),canbeRolled:true}))
   }
 
   useEffect(()=>{
