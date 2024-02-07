@@ -6,7 +6,7 @@ import WinnerAlert from './components/WinnerAlert';
 import Footer from './components/Footer';
 
 import { useState, useEffect } from "react";
-import { reverseCoinMap } from "./utils/utils";
+import { reverseCoinMap,playAudio } from "./utils/utils";
 function App(props) {
   // set colorChossen to false
 
@@ -49,6 +49,8 @@ function App(props) {
   const [possibilitiesAndCurrentPlayer, changePossibiltiesArray] = useState({});
 
   const assignColorToAllCoins = color => {
+    // playAudio('https://assets.mixkit.co/active_storage/sfx/216/216-preview.mp3');
+    playAudio('coin');
     const player2Color = fourColor[(fourColor.indexOf(color) + 1) % 4];
     const player3Color = fourColor[(fourColor.indexOf(color) + 2) % 4];
     const player4Color = fourColor[(fourColor.indexOf(color) + 3) % 4];

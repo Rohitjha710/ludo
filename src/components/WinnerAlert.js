@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import Swal from 'sweetalert2';
 
-const WinnerAlert = ({ winner }) => {
+const WinnerAlert = ({ winner,color }) => {
   useEffect(() => {
     if (winner) {
       Swal.fire({
-        title: `Player ${winner} has won!!`,
+        title: `Player ${winner} (${color}) has won!!`,
         icon: 'success',
         confirmButtonText: 'Ok',
         showConfirmButton: true, // Remove the checkbox

@@ -11,7 +11,7 @@ const ChooseColor = ({chooseColor}) => {
     return (
       <div className="form-container">
       <h1>Choose your Coin Color<br/> 
-        (अपने घर के रंग चयन करें)</h1>
+        (अपने घर के रंग का चयन करें)</h1>
       <div className="color-container">
         <div className="choose-color red" onClick={()=>handleSubmit('red')}></div>
         <div className="choose-color green" onClick={()=>handleSubmit('green')}></div>

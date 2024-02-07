@@ -89,3 +89,15 @@ export const reverseCoinMap={
     "p4hg5": "88",
     "home":"89"
   }
+
+export const playAudio =(url)=>{
+  const audio = new Audio(`../assets/audio/${url}.mp3`);
+  console.log(audio);
+  audio.play().then(a=>console.log(a)).catch(e=>console.log('errorororo',e));
+  
+  audio.onended = () => {
+      // Once the audio ends, remove the event listener and pause the audio
+      audio.pause();
+      audio.currentTime = 0;
+  };
+}
