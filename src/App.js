@@ -47,7 +47,6 @@ function App(props) {
   };
   const safeCells =['1','48','9','14','22','27','35','40','48','89'];
 
-  const [tempInput, changeTempInput] = useState("");
   const [coinsState, changeCoinsState] = useState(coinsStateInitial);
   const [diceState, changeDiceState] = useState({
     whoseChance: "p1",
@@ -55,6 +54,10 @@ function App(props) {
     canbeRolled: true
   });
   const [possibilitiesAndCurrentPlayer, changePossibiltiesArray] = useState({});
+
+    const [winner,setWinner] = useState('');
+  const [noOfPlayer,changeNoOfPlayer] = useState(4);
+
 
   const assignColorToAllCoins = color => {
     playAudio(gameStart);
@@ -82,10 +85,11 @@ function App(props) {
     });
   };
 
-  const chooseColor = color => {
+  const chooseColor = ({color,noOfPlayer}) => {
     changeMyColor(color);
     setPlayer1Color(true);
     assignColorToAllCoins(color);
+    changeNoOfPlayer(noOfPlayer);
   };
 
   const getNextCellNumbersForAllCoins = (player, diceValue) => {
@@ -164,7 +168,7 @@ function App(props) {
   changeDiceState((prev)=>({...prev,value: diceValue,canbeRolled:false}))
   }else{
     //player cannot make a move
-    changeDiceState((prev)=>({ ...diceState, value: diceValue,whoseChance:prev.whoseChance==='p1'?'p3':'p1' }));
+    changeDiceState((prev)=>({ ...diceState, value: diceValue,whoseChance:nextPlayer(prev.whoseChance) }));
   }
   };
 
@@ -214,6 +218,34 @@ function App(props) {
     return "true";
   }
 
+  const nextPlayer=(currentPlayer)=>{
+    if(noOfPlayer===2){
+      if(currentPlayer==='p1'){
+        return 'p3'
+      }
+      else{
+        return 'p1'
+      }
+    }
+    else
+    {
+      if(currentPlayer==='p1'){
+        return 'p2'
+      }
+      else if(currentPlayer==='p2'){
+        return 'p3'
+
+      }
+      else if(currentPlayer==='p3'){
+        return 'p4'
+
+      }
+      else{
+        return 'p1'
+
+      }
+    }
+  }
 
   const handleCoinClick = async (currentCell)=>{
     
@@ -281,7 +313,7 @@ function App(props) {
     
     revertPulsatingEffect(possibilitiesAndCurrentPlayer);
     changeCoinEffect(false);
-    changeDiceState((prev)=>({...prev,whoseChance:prev.value==='6'||kill||nextCellId==='89'?prev.whoseChance:(prev.whoseChance==='p1'?'p3':'p1'),canbeRolled:true}))
+    changeDiceState((prev)=>({...prev,whoseChance:prev.value==='6'||kill||nextCellId==='89'?prev.whoseChance:nextPlayer(prev.whoseChance),canbeRolled:true}))
   }
 
 
@@ -308,7 +340,6 @@ function App(props) {
     }
   },[coinsState])
 
-  const [winner,setWinner] = useState('');
 
   //checkForWinner
   return (
@@ -316,7 +347,7 @@ function App(props) {
 
       {colorChoosen ? (
         <div className="board-and-dice">
-         {winner ? <><FireWorks winner='p1'/>
+         {winner ? <><FireWorks />
           <WinnerAlert winner={winner}/></>:''}
           <Container
             myColor={myColor}

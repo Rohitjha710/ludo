@@ -10,10 +10,10 @@ import {
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
-const Dice = ({ diceState, onDiceRoll, myColor, player3Color }) => {
+const Dice = ({ diceState, onDiceRoll, myColor, player3Color,player2Color,player4Color }) => {
   const [loading, setLoading] = useState(true);
   const diceCurrentColor =
-    diceState.whoseChance == "p1" ? myColor : player3Color;
+    diceState.whoseChance === "p1" ? myColor : diceState.whoseChance === "p2"?player2Color:diceState.whoseChance === "p3"?player3Color:player4Color;
   useEffect(() => {
     // Show loading for 1 second
     setLoading(true);
@@ -87,10 +87,7 @@ const Dice = ({ diceState, onDiceRoll, myColor, player3Color }) => {
         </button>
         )}
       </div>
-      {/* <div className="arrow-container">
-    <p>{diceState.whoseChance==='p1'?'Player 1':"Player 3"}</p>
-       <FaArrowRight className="arrow-icon" style={{color:diceState.whoseChance==='p1'?myColor:player3Color}}/>
-     </div> */}
+
     </>
   );
 };

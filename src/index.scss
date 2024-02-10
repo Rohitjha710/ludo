@@ -63,10 +63,17 @@ align-items: center;
   margin-bottom: 10px;
   border-radius: 10px;
   cursor: pointer;
+  display: flex;
+}
+.choose-color h2{
+  margin: auto;
 }
 .choose-color.red{
 background-color: $red;
 }
+.choose-color.orange{
+  background-color: orange;
+  }
 .choose-color.green{
 
   background-color: $green;
