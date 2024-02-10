@@ -52,6 +52,10 @@ const ChooseColor = ({ chooseColor }) => {
               className="choose-color orange"
               onClick={() => handleNoChosen(2)}
             ><h2>2</h2></div>
+               <div
+              className="choose-color orange"
+              onClick={() => handleNoChosen(3)}
+            ><h2>3</h2></div>
             <div
               className="choose-color orange"
               onClick={() => handleNoChosen(4)}

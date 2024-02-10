@@ -227,6 +227,18 @@ function App(props) {
         return 'p1'
       }
     }
+    else if(noOfPlayer===3){
+      if(currentPlayer==='p1'){
+        return 'p2'
+      }
+      else if(currentPlayer==='p2'){
+        return 'p3'
+      }
+      else{
+        return 'p1'
+      }
+
+    }
     else
     {
       if(currentPlayer==='p1'){
