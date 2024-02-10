@@ -37,7 +37,7 @@ const ChooseColor = ({ chooseColor }) => {
               onClick={() => handleSubmit("blue")}
             ></div>
           </div>
-          )
+          
         </>
       ) : (
         <>
