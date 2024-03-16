@@ -1,25 +1,32 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Ludo By Rohit",
+  "name": "Ludo By Rohit",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "favicon.png",
+      "sizes": "144x144",
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "src": "icon512.png",
+      "sizes": "512X512",
+      "type": "image/png"
     },
     {
-      "src": "logo512.png",
+      "src": "icon512.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "sizes": "512x512"
+      "purpose": "maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#ADD8E6",
+  "background_color": "#ffffff",
+  "splash_pages": null,
+  "splash_screen": {
+    "image_320x480": "splash-screen-320x480.png",
+    "image_768x1004": "splash-screen-768x1004.png",
+    "image_512x512": "icon512.png"
+  }
 }
